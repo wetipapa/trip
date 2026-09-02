@@ -79,6 +79,21 @@ section{margin-top:44px}
 /* flight notice */
 .notice{margin-top:18px;border:1px dashed var(--amber);background:var(--amber-soft);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink)}
 .notice b{color:var(--amber)}
+.notice.ok{border-style:solid;border-color:var(--ok);background:var(--ok-soft)}
+.notice.ok b{color:var(--ok)}
+.fhead{font-size:13.5px;margin-bottom:10px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+@media(max-width:680px){.fgrid{grid-template-columns:1fr}}
+.fleg{background:var(--surface);border:1px solid var(--line);border-radius:10px;padding:10px 12px}
+.flab{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin-bottom:7px;font-size:12px;font-weight:700;color:var(--ok)}
+.flab small{font-weight:500;color:var(--ink3)}
+.frow{display:flex;align-items:center;gap:10px}
+.fseg{flex:1;min-width:0}
+.fseg b{display:block;font-size:19px;line-height:1.15;color:var(--ink)}
+.fseg span{display:block;margin-top:2px;font-size:11px;color:var(--ink2);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.farr{flex:none;color:var(--ink3);font-size:13px}
+.fmeta{margin-top:8px;padding-top:8px;border-top:1px solid var(--line);font-size:12px;color:var(--ink2)}
+.fnote{margin-top:10px;font-size:12.5px;line-height:1.7;color:var(--ink2)}
 
 /* timeline */
 .tl{display:grid;gap:10px}
@@ -301,14 +316,20 @@ details.h[open] summary{border-bottom:1px solid var(--line)}
 const META = {
   searchedOn: "2026년 9월 2일",
   fx: 8.58, // KRW per JPY (Wise mid-market, 2026-09-02)
-  flights: { arrive: null, depart: null } // 예: "10:35 NGO 도착", "18:20 NGO 출발"
+  // 항공편 확정. 가는 편 편명은 예약확인서 확인 후 no에 넣으면 자동으로 표시됩니다.
+  flights: {
+    out: { label:"가는 편", date:"12/28 (월)", dep:"10:35", from:"ICN 인천 T1",
+           arr:"12:30", to:"NGO 센트레아 T2", air:"제주항공", no:"", pnr:"" },
+    ret: { label:"오는 편", date:"12/31 (목)", dep:"17:50", from:"NGO 센트레아 T2",
+           arr:"19:55", to:"ICN 인천 T1", air:"제주항공", no:"7C1204", pnr:"P7KKML" }
+  }
 };
 
 const ITINERARY = [
-  {d:"12/28",w:"월",t:"한국 → 나고야 도착 → 사카에",s:"오아시스21 · 포켓몬센터 나고야(나고야 PARCO 동관 2F, 야바초역 직결) · 저녁·쇼핑",note:"포켓몬센터 10:00–21:00, 연중무휴(연말 시간 변동 가능)",ok:true},
+  {d:"12/28",w:"월",t:"한국 → 나고야 도착 → 사카에",s:"ICN 10:35 → NGO 12:30 · μ-SKY로 나고야역 28~37분 · 오아시스21 · 포켓몬센터 나고야(나고야 PARCO 동관 2F, 야바초역 직결) · 저녁·쇼핑",note:"입국·수하물 포함 시내 14시 전후 도착 예상 → 체크인 후 오후 일정으로 충분. 포켓몬센터 10:00–21:00, 연중무휴(연말 시간 변동 가능)",ok:true},
   {d:"12/29",w:"화",t:"LEGOLAND Japan",s:"아오나미선 킨조후토(金城ふ頭)역 · 거의 하루 종일",note:"2025-26 연말 10:00–18:00 운영 패턴. 2026 캘린더는 공식 사이트에서 재확인",ok:false},
   {d:"12/30",w:"수",t:"나고야항 수족관 · Sea Train Land",s:"메이코선 나고야코(名古屋港)역 도보 5분 · 겨울 9:30–17:00 · 성인 ¥2,030 / 초등 ¥1,010",note:"수족관은 연말연시 무휴 패턴(2025-26). Sea Train Land는 겨울 단축 운영·휴일 있음 → 확인 필요",ok:false},
-  {d:"12/31",w:"목",t:"체크아웃 → 센트레아 공항 → Flight of Dreams → 귀국",s:"메이테츠 μ-SKY 나고야역 28~37분 · Flight of Dreams 10:00–17:00 무료(연중무휴)",note:"항공편 시간에 따라 짐 보관·출발 시각 조정",ok:true}
+  {d:"12/31",w:"목",t:"체크아웃 → 센트레아 공항 → Flight of Dreams → 귀국",s:"메이테츠 μ-SKY 나고야역 28~37분 · Flight of Dreams 10:00–17:00 무료(연중무휴) · NGO 17:50 → ICN 19:55",note:"7C1204 17:50 출발 → 15:50까지 공항 도착, 나고야역에서 늦어도 15:00 μ-SKY. 오전 체크아웃 후 짐과 함께 공항으로 이동해 Flight of Dreams는 공항에서 소화",ok:true}
 ];
 
 const AREAS = [
@@ -482,9 +503,22 @@ const roomSize = h => (h.room.match(/(\d+(?:\.\d+)?)㎡/)||[,"?"])[1];
 const walk = h => (h.station.match(/도보\s*(약\s*)?(\d+(?:~\d+)?)분/)||[])[2] ? (h.station.match(/도보\s*(약\s*)?(\d+(?:~\d+)?)분/)[2]+"분") : "직결";
 
 /* flight notice */
-(()=>{const f=META.flights;const el=document.getElementById("flightNotice");
- if(!f.arrive&&!f.depart){el.innerHTML="✈️ <b>항공편 시간 입력 전</b> — 도착/출발 시각이 정해지면 첫날 사카에 일정과 마지막 날 짐 보관·공항 이동 판단이 달라질 수 있어요. (데이터의 <code>META.flights</code>에 입력)";}
- else el.innerHTML=`✈️ 도착 ${f.arrive||"미정"} · 출발 ${f.depart||"미정"}`;})();
+(()=>{const f=META.flights||{};const el=document.getElementById("flightNotice");
+ if(!f.out&&!f.ret){el.innerHTML="✈️ <b>항공편 시간 입력 전</b> — 도착/출발 시각이 정해지면 첫날 사카에 일정과 마지막 날 짐 보관·공항 이동 판단이 달라질 수 있어요. (데이터의 <code>META.flights</code>에 입력)";return;}
+ const leg=g=>!g?"":`<div class="fleg">
+   <div class="flab">${g.label}<small>${g.date}</small></div>
+   <div class="frow">
+     <div class="fseg"><b class="num">${g.dep}</b><span>${g.from}</span></div>
+     <div class="farr">✈</div>
+     <div class="fseg"><b class="num">${g.arr}</b><span>${g.to}</span></div>
+   </div>
+   <div class="fmeta">${g.air}${g.no?' <b class="num">'+g.no+"</b>":""}${g.pnr?' · 예약번호 <b class="num">'+g.pnr+"</b>":""}</div>
+ </div>`;
+ el.classList.add("ok");
+ el.innerHTML=`<div class="fhead">✈️ <b>항공편 확정</b> — 이 시간 기준으로 첫날·마지막 날 동선을 잡았어요.</div>
+ <div class="fgrid">${leg(f.out)}${leg(f.ret)}</div>
+ <div class="fnote"><b>첫날</b> 12:30 도착 → 입국·수하물 40~60분 + μ-SKY 28~37분 → 시내 <b>14시 전후</b> 도착. 체크인 후 오후를 통째로 사카에에 쓸 수 있어요.<br>
+ <b>마지막 날</b> 17:50 출발 → <b>15:50까지 공항 도착</b>(국제선 2시간 전), 나고야역에서 <b>늦어도 15:00 μ-SKY</b> 탑승. 오전에 체크아웃해 짐과 함께 공항으로 가서, Flight of Dreams(센트레아 내 무료)를 공항에서 소화하는 게 가장 안전해요.</div>`;})();
 
 /* timeline */
 document.getElementById("timeline").innerHTML = ITINERARY.map(d=>`
