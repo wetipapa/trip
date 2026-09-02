@@ -198,6 +198,44 @@ details.h[open] summary{border-bottom:1px solid var(--line)}
 .src{font-size:11px;color:var(--ink3);line-height:1.5}
 .src a{color:var(--ink3)}
 .scorebar{display:grid;gap:4px;font-size:12px}
+
+/* spots & meals */
+.subhead{display:flex;align-items:baseline;gap:8px;margin:22px 0 10px;flex-wrap:wrap}
+.subhead h3{font-size:16px}
+.subhead span{font-size:12px;color:var(--ink3)}
+.cards{display:grid;gap:12px}
+@media(min-width:720px){.cards{grid-template-columns:1fr 1fr}}
+.card{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden;display:flex;flex-direction:column}
+.card.must{border:1px solid var(--accent)}
+.ph{position:relative;aspect-ratio:16/9;background:var(--surface2)}
+.ph img{width:100%;height:100%;object-fit:cover;display:block}
+.ph .badge{position:absolute;top:10px;left:10px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;background:rgba(22,36,58,.72);color:#fff;backdrop-filter:blur(4px)}
+.ph .badge.must{background:var(--accent)}
+.ph .badge.no{background:var(--no)}
+.ph .cr{position:absolute;right:6px;bottom:5px;font-size:9px;color:#fff;opacity:.75;background:rgba(0,0,0,.4);padding:1px 5px;border-radius:4px;max-width:70%;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.ph .cr a{color:#fff}
+.cd{padding:13px 15px 15px;display:flex;flex-direction:column;gap:9px;flex:1}
+.cd .nm{font-weight:700;font-size:16px;line-height:1.25}
+.cd .nm small{display:block;font-weight:500;font-size:11px;color:var(--ink3);margin-top:2px}
+.cd .ds{font-size:13px;color:var(--ink2);margin:0;line-height:1.6}
+.cd .ds b{color:var(--ink)}
+.facts{display:grid;gap:5px;font-size:12px}
+.facts div{display:grid;grid-template-columns:52px 1fr;gap:8px;align-items:start}
+.facts dt{color:var(--ink3)}
+.facts b{font-weight:600;color:var(--ink2)}
+.facts b.hi{color:var(--ok)}
+.facts b.lo{color:var(--no)}
+.cta{display:flex;gap:6px;flex-wrap:wrap;margin-top:auto;padding-top:2px}
+.cta a{font-size:12px;font-weight:700;text-decoration:none;padding:6px 11px;border-radius:999px;background:var(--surface2);color:var(--ink2);border:1px solid var(--line)}
+.cta a.go{background:var(--accent);color:var(--accent-ink);border-color:transparent}
+.closed{background:var(--no-soft);border:1px solid var(--no);border-radius:var(--r);padding:14px 16px;font-size:13px;line-height:1.7;color:var(--ink)}
+.closed h4{margin:0 0 8px;font-size:13px;color:var(--no);letter-spacing:.04em}
+.closed ul{margin:0;padding-left:17px}
+.closed li{margin:3px 0}
+.closed b{color:var(--no)}
+.mealtag{display:inline-flex;align-items:center;gap:5px;font-size:11px;font-weight:800;padding:4px 10px;border-radius:999px;background:var(--accent-soft);color:var(--accent)}
+.credits{margin-top:10px;font-size:10.5px;color:var(--ink3);line-height:1.6}
+.credits a{color:var(--ink3)}
 .scorebar div{display:grid;grid-template-columns:120px 1fr 36px;gap:8px;align-items:center}
 .scorebar i{display:block;height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
 .scorebar i b{display:block;height:100%;background:var(--accent)}
@@ -246,7 +284,7 @@ details.h[open] summary{border-bottom:1px solid var(--line)}
 </header>
 
 <nav class="nav" aria-label="섹션 이동">
-  <a href="#s1">일정</a><a href="#s2">지역 선택</a><a href="#s3">TOP PICKS</a><a href="#s4">비교표</a><a href="#s5">상세</a><a href="#s6">이동시간</a><a href="#s7">Final</a>
+  <a href="#s1">일정</a><a href="#s2">지역 선택</a><a href="#s3">TOP PICKS</a><a href="#s4">비교표</a><a href="#s5">상세</a><a href="#s6">이동시간</a><a href="#s7">Final</a><a href="#s8">볼거리</a><a href="#s9">식사</a>
 </nav>
 
 <!-- 1. itinerary -->
@@ -308,6 +346,22 @@ details.h[open] summary{border-bottom:1px solid var(--line)}
   </div>
 </section>
 
+<!-- 8. spots -->
+<section id="s8">
+  <div class="sec-head"><span class="eyebrow">Section 8</span><h2>아이와 갈 곳</h2><p>7세 남아 기준으로 고른 곳. <b>레고랜드·수족관은 확정</b>이고 나머지는 남는 시간에 붙이는 후보예요. 연말이라 “여는지”가 제일 중요해서 그것부터 정리했어요.</p></div>
+  <div class="closed" id="closedBox"></div>
+  <div class="subhead"><h3>확정 — 이건 무조건</h3><span>일정의 큰 줄기</span></div>
+  <div class="cards" id="spotsMust"></div>
+  <div class="subhead"><h3>붙이기 좋은 곳</h3><span>이동 동선 안에서 1~2시간짜리</span></div>
+  <div class="cards" id="spotsMore"></div>
+</section>
+
+<!-- 9. meals -->
+<section id="s9">
+  <div class="sec-head"><span class="eyebrow">Section 9</span><h2>아침 · 점심 · 저녁</h2><p>아이가 먹을 게 있고, 웨이팅이 길지 않고, 동선에서 안 벗어나는 곳 위주. 예약 가능 여부를 같이 적어뒀어요.</p></div>
+  <div id="meals"></div>
+</section>
+
 <footer class="foot" id="foot"></footer>
 </div>
 <div class="toast" id="toast">링크를 복사했어요</div>
@@ -328,6 +382,184 @@ const META = {
            dur:"2시간 05분", eq:"", cls:"" }
   }
 };
+
+
+/* ===== 관광지 · 식당 (2026-09-02 조사) =====
+   nc(연말영업): "open" 확인·영업 / "check" 재확인 필요 / "closed" 우리 일정 중 휴관
+   사진은 img/ 폴더(위키미디어 커먼즈, 라이선스는 각 카드 하단·푸터 표기) */
+const CLOSED_YEAREND = {
+  note: "일본은 12/29~1/3이 연말 휴관 시즌이라, <b>나고야의 실내 명소 상당수가 우리 일정과 정확히 겹쳐 문을 닫습니다.</b> 아래는 2025-26 연말 공지 기준이라 <b>2026-27 일정은 각 공식 사이트에서 재확인</b>이 필요하지만, 매년 같은 패턴이라 기대하지 않는 편이 안전해요.",
+  list: [
+    ["리니어 · 철도관", "12/28~1/1 휴관", "우리 일정 <b>4일 전부</b> 불가. 신칸센 실물이 잔뜩이라 제일 아깝지만 방법이 없어요.", "https://museum.jr-central.co.jp/facilities/"],
+    ["나고야시 과학관", "12/29~1/3 휴관", "세계 최대 플라네타륨. 12/28(첫날)은 열지만 도착이 14시라 무리.", "https://www.ncsm.city.nagoya.jp/visit/visitors_guide/admission.html"],
+    ["토요타 산업기술기념관", "12/29~1/5 휴관", "12/28만 가능(월요일 정기휴관과도 겹침 → 사실상 불가).", "https://www.tcmit.org/visit/openinghour"],
+    ["나고야성", "12/29·30·31 휴원", "12/28은 개원. 야외라 겨울엔 아이가 금방 지쳐요.", "https://www.nagoyajo.city.nagoya.jp/info/"],
+    ["히가시야마 동식물원", "12/29~1/1 휴원", "12/28은 월요일 정기휴원 → 이번 일정엔 갈 날이 없어요.", "https://www.higashiyama.city.nagoya.jp/01_annai/01_01kaien/"]
+  ]
+};
+
+const SPOTS = [
+ {id:"legoland", must:true, name:"레고랜드 재팬", ja:"レゴランド・ジャパン", img:"legoland",
+  badge:"DAY 2 확정", nc:"check", ncTxt:"연말 운영(2025-26은 10:00–18:00 패턴) — 2026 캘린더 공개 시 재확인",
+  ds:"이번 여행의 <b>메인 이벤트</b>. 7세는 놀이기구 신장제한(대부분 90~120cm)에 거의 다 걸리지 않아 하루를 통으로 쓸 수 있어요. 실내 어트랙션도 있어서 겨울에도 버팀.",
+  facts:[["시간","10:00–18:00 (연말 패턴)"],["요금","날짜별 변동(다이내믹 프라이싱)"],["가는 법","아오나미선 킨조후토역 도보 5분 · 나고야역에서 24분 무환승"],["식사","파크 안 브릭하우스 버거 등 — 세트 주문 시 드링크바 포함"]],
+  book:"<b>공식 온라인 사전구매 권장</b>(날짜지정). 당일권보다 싸고 매표 줄을 건너뜁니다. 세븐일레븐·asoview·KLOOK에서도 구매 가능.",
+  map:"レゴランド・ジャパン",
+  src:[["공식 티켓","https://www.legoland.jp/tickets/"],["신장제한 FAQ","https://faq.legoland.jp/hc/ja-jp/articles/10190181993501"]]},
+
+ {id:"aquarium", must:true, name:"나고야항 수족관", ja:"名古屋港水族館", img:"aquarium",
+  badge:"DAY 3 확정", nc:"open", ncTxt:"연말연시 무휴 패턴 · 겨울 9:30–17:00",
+  ds:"일본 최대급. <b>돌고래 퍼포먼스</b>(북관 3F 스타디움, 15분, 하루 3~4회)가 하이라이트라 도착하면 그날 시간표부터 확인하세요. 벨루가·범고래도 있어요.",
+  facts:[["시간","9:30–17:00 (겨울)"],["요금","성인 ¥2,030 / 초등·중학 ¥1,010"],["가는 법","메이코선 나고야코역 도보 5분"],["묶기","<b>같은 광장에 남극관측선 후지·포트빌딩 전망대</b> — 3시설 공통권이 이득"]],
+  book:"완전 예약제는 아니고 당일권도 삽니다. 다만 연말은 매표소가 길어서 <b>티켓피아·편의점(로손/패미마/세븐)·asoview 사전구매</b>가 편해요.",
+  map:"名古屋港水族館",
+  src:[["요금·시간","https://nagoyaaqua.jp/fee/"],["혼잡 정보","https://banzokubiology.com/nagoyaaqua-newyear-crowd/"]]},
+
+ {id:"fuji", must:false, name:"남극관측선 후지 + 포트빌딩 전망대", ja:"南極観測船ふじ・ポートビル", img:"fuji",
+  badge:"수족관과 세트", nc:"open", ncTxt:"9:30–17:00(입장 16:30) · 겨울방학 기간은 월요일도 개관",
+  ds:"수족관 <b>바로 옆</b>. 진짜 쇄빙선에 올라가 조타실·기관실·헬기까지 들어가 볼 수 있어서 남자아이가 특히 좋아합니다. 포트빌딩 7F 전망대(63m)에서 항구가 한눈에.",
+  facts:[["시간","9:30–17:00 (입장 16:30)"],["요금","후지 단독 성인 ¥300 / 초중 ¥200"],["공통권","전망대+해양박물관+후지 성인 ¥710 / 초중 ¥400"],["가는 법","수족관에서 도보 3분"]],
+  book:"예약 불필요. 현장 구매. <b>수족관 나오고 1~1.5시간</b> 정도로 붙이기 딱 좋아요.",
+  map:"南極観測船ふじ",
+  src:[["공식","https://nagoyaaqua.jp/garden-pier/fuji/"]]},
+
+ {id:"seatrain", must:false, name:"Sea Train Land", ja:"シートレインランド", img:"seatrain",
+  badge:"수족관 옆", nc:"check", ncTxt:"겨울 단축운영·휴무일 있음 → 방문 전 확인 필수",
+  ds:"수족관 건너편 소형 유원지. <b>대관람차</b>가 랜드마크예요. 아이가 수족관에서 에너지가 남았을 때 30분 정도 태우기 좋고, 안 열려 있어도 손해가 없는 위치.",
+  facts:[["시간","겨울 단축 · 휴무 있음"],["요금","놀이기구별 개별 요금"],["가는 법","나고야코역 바로 앞"],["주의","<b>가기 전 공식 확인</b> — 겨울 평일 휴무가 잦아요"]],
+  book:"예약 없음. 현장 발권.",
+  map:"シートレインランド 名古屋",
+  src:[["잘란 정보","https://www.jalan.net/kankou/spt_guide000000164311/"]]},
+
+ {id:"fod", must:false, name:"Flight of Dreams", ja:"フライト・オブ・ドリームズ", img:"fod",
+  badge:"DAY 4 · 공항", nc:"open", ncTxt:"10:00–17:00 · 연중무휴 · 입장 무료",
+  ds:"센트레아 <b>제1터미널 옆</b>. 보잉 787 1호기 실물이 통째로 들어와 있고 아래가 시애틀 컨셉 식당가라, <b>귀국 전 남는 시간을 여기서 쓰는 게 이번 일정의 정답</b>이에요. 무료라 부담도 없고요.",
+  facts:[["시간","10:00–17:00"],["요금","<b>무료</b> (유료 체험존 별도)"],["가는 법","μ-SKY 종점(제1터미널)에서 바로"],["동선","여기 보고 <b>제2터미널로 도보 8분</b> 이동 → 제주항공 체크인"]],
+  book:"예약 불필요. 짐은 터미널 코인로커 이용.",
+  map:"FLIGHT OF DREAMS 中部国際空港",
+  src:[["아이치현 공식","https://aichinow.pref.aichi.jp/spots/detail/2446/"]]},
+
+ {id:"oasis21", must:false, name:"오아시스21 물의 우주선", ja:"オアシス21 水の宇宙船", img:"oasis21",
+  badge:"DAY 1 · 사카에", nc:"open", ncTxt:"옥상 무료 · 12/31은 18:00까지 · 라이트업 22:00까지",
+  ds:"유리 지붕 위로 물이 흐르는 공중 산책로(지상 14m)를 <b>무료로</b> 걷습니다. 밤엔 조명이 들어와서 첫날 저녁 사카에 일정과 정확히 맞아요. 바로 옆이 미라이타워.",
+  facts:[["시간","옥상 10:00–21:00 · 라이트업 ~22:00"],["요금","<b>무료</b>"],["가는 법","사카에역 직결"],["연말","12/31 18:00까지 · 1/1 전점 휴업"]],
+  book:"예약 없음. 포켓몬센터(야바초)와 지하철 1정거장이라 첫날에 묶기 좋아요.",
+  map:"オアシス21",
+  src:[["공식","https://www.sakaepark.co.jp/about/"],["연말영업","https://www.sakaepark.co.jp/news/5975-2/"]]},
+
+ {id:"miraitower", must:false, name:"중부전력 MIRAI TOWER", ja:"中部電力 MIRAI TOWER", img:"miraitower",
+  badge:"DAY 1 · 사카에", nc:"open", ncTxt:"연말연시 무휴 · 10:00–21:00 (최종입장 20:40)",
+  ds:"일본에서 가장 오래된 전파탑(1954). 오아시스21 바로 옆이라 <b>둘을 묶어 한 시간</b>이면 끝나요. 아이는 유리 바닥과 야경을 좋아합니다. 굳이 올라가지 않고 밑에서 봐도 예뻐요.",
+  facts:[["시간","10:00–21:00 (최종입장 20:40)"],["요금","고교생 이상 ¥1,300 / 초중 ¥800"],["가는 법","사카에역 도보 3분 · 오아시스21 옆"],["팁","12/31 23:50부터 카운트다운 라이트업 — 우리는 이미 귀국 후"]],
+  book:"당일 현장 구매 가능. Boo-Woo 등 온라인 사전 구매도 있어요.",
+  map:"中部電力 MIRAI TOWER",
+  src:[["공식","https://www.nagoya-tv-tower.co.jp/"]]},
+
+ {id:"osu", must:false, name:"오스 상점가", ja:"大須商店街", img:"osu",
+  badge:"비 오면 여기", nc:"check", ncTxt:"상점가는 열지만 개별 점포는 연말휴무 제각각",
+  ds:"지붕 있는 아케이드라 <b>날씨와 무관</b>. 먹거리(닭튀김·천무스·타피오카)를 걸어다니며 먹고, 게임·피규어·중고 가게가 많아 아이가 지루해하지 않아요. 포켓몬센터(야바초)에서 도보 10분.",
+  facts:[["시간","점포별 (대체로 11:00–19:00)"],["요금","무료 (먹는 만큼)"],["가는 법","오스칸논역·가미마에즈역 도보 2분"],["아이","리씨의 대만 가라아게 등 <b>한 손에 들고 먹는 것</b> 위주"]],
+  book:"예약 없음. 연말엔 쉬는 가게가 섞여 있으니 기대치를 낮추고 가세요.",
+  map:"大須商店街",
+  src:[["먹거리 정리","https://www.tabemaro.jp/column/osu-tabearuki/"]]},
+
+ {id:"jrct", must:false, name:"JR센트럴타워즈 스카이스트리트", ja:"スカイストリート", img:"jrct",
+  badge:"무료 전망", nc:"open", ncTxt:"7:00–24:00 · 무료",
+  ds:"나고야역 <b>15층, 무료</b> 전망 공간. 벽 한 면이 통유리라 나고야성까지 보여요. 호텔이 나고야역 근처면 저녁 먹고 5분 들르기 딱 좋고, 돈이 안 드니 실패해도 그만입니다.",
+  facts:[["시간","7:00–24:00"],["요금","<b>무료</b>"],["가는 법","나고야역 직결 15F"],["팁","전망대가 아니라 통로라 오래 머물 곳은 아님"]],
+  book:"예약·발권 없음. 그냥 엘리베이터 타고 올라가면 됩니다.",
+  map:"JRセントラルタワーズ スカイストリート",
+  src:[["나고야시 관광","https://www.nagoya-info.jp/spot/detail/131/"]]},
+
+ {id:"skyboat", must:false, name:"선샤인사카에 Sky-Boat", ja:"サンシャインサカエ スカイボート", img:"skyboat",
+  badge:"사카에 15분", nc:"check", ncTxt:"12:00–22:00 · 연말 영업 재확인 필요",
+  ds:"건물을 관통하는 <b>시스루 대관람차</b>. 한 바퀴 15분이라 시간이 애매하게 남았을 때 채우기 좋아요. 곤돌라에 에어컨·시트히터가 있어서 겨울에도 안 춥습니다.",
+  facts:[["시간","12:00–22:00"],["요금","1인 ¥600 (곤돌라 4인승)"],["가는 법","사카에역 도보 2분"],["소요","1바퀴 약 15분"]],
+  book:"현장 발권.",
+  map:"サンシャインサカエ Sky-Boat",
+  src:[["이코요","https://iko-yo.net/facilities/4801"]]},
+
+ {id:"makerspier", must:false, name:"메이커스 피어", ja:"メイカーズピア", img:"makerspier",
+  badge:"레고랜드 옆", nc:"check", ncTxt:"점포별 영업 · 연말 일정 미확인",
+  ds:"레고랜드 <b>정문 바로 옆</b> 무료 입장 상업시설. 파크에서 일찍 나왔거나 입장 전 시간이 뜰 때 밥 먹고 체험(바리스타·아쿠아돔 만들기) 하기 좋아요. 파크 안보다 식사가 쌉니다.",
+  facts:[["시간","점포별 (대체로 11:00–)"],["요금","입장 무료"],["가는 법","킨조후토역 도보 3분"],["주의","연말 영업은 공식 사이트 확인 필요"]],
+  book:"체험은 현장 접수. 식당은 대부분 예약 없이 이용.",
+  map:"メイカーズピア",
+  src:[["공식","https://www.makerspier.com/"]]}
+];
+
+const MEALS = [
+ {slot:"아침", icon:"🌅", note:"나고야는 <b>모닝 문화</b>가 있어서, 커피 한 잔 값에 토스트·삶은달걀이 딸려 나옵니다. 아이 아침으로 부담 없고 싸요.",
+  items:[
+  {id:"komeda", name:"코메다 커피 (모닝)", ja:"コメダ珈琲店", img:"komeda",
+   dish:"모닝 세트 — 토스트 + 삶은달걀",
+   ds:"개점~11:00에 <b>음료만 주문해도 토스트와 삶은달걀이 무료</b>. 시내 곳곳에 있어서 숙소 근처 아무 지점이나 가면 되고, 좌석이 넓어 아이 데리고 앉기 편합니다.",
+   facts:[["모닝","개점~11:00 (음료 주문 시 무료)"],["가격","커피 ¥500 안팎"],["예약","불필요 · 지점 다수"]],
+   map:"コメダ珈琲店 名古屋",
+   src:[["공식 모닝","https://www.komeda.co.jp/menu/morning_komeda.html"]]},
+  {id:"ogura", name:"콘파루 메이치카점", ja:"コンパル メイチカ店", img:"ogura",
+   dish:"오구라 토스트 (팥 토스트)",
+   ds:"나고야역 <b>지하상가 안</b>이라 비 안 맞고 갑니다. 나고야 명물 오구라 토스트를 아침에 먹을 수 있고, 새우튀김 샌드도 유명해요. 8시 오픈이라 첫차 일정엔 살짝 늦습니다.",
+   facts:[["시간","8:00–21:00 (L.O. 20:45)"],["모닝","8:00–11:00"],["예약","불필요 · 54석"]],
+   map:"コンパル メイチカ店",
+   src:[["정리 기사","https://www.tabemaro.jp/column/ogura-toast/"]]},
+  {id:"kishimen", name:"스미요시 (신칸센 홈)", ja:"名代きしめん 住よし", img:"kishimen",
+   dish:"카키아게 키시멘 (납작면 우동)",
+   ds:"신칸센 승강장 위의 <b>서서 먹는 키시멘</b>. 6:30부터 열어요. 표가 없어도 <b>입장권 ¥150(2시간)</b>이면 들어갈 수 있는데, 아이한테는 “기차 보면서 아침 먹기”가 이벤트가 됩니다.",
+   facts:[["시간","6:30–21:40 (L.O. 21:30)"],["가격","키시멘 ¥420~"],["입장","입장권 ¥150 (소아 ¥70) · 2시간"]],
+   map:"名代きしめん 住よし 名古屋駅",
+   src:[["입장권 규정","https://faq.jr-central.co.jp/detail/faq000059.html"]]}]},
+
+ {slot:"점심", icon:"🍱", note:"낮은 관광지 근처에서 <b>줄이 짧은 곳</b>으로. 유명 우나기집은 점심 웨이팅이 1시간을 넘겨서 아이 데리고는 권하지 않아요.",
+  items:[
+  {id:"yabaton", name:"야바톤 야바초 본점", ja:"矢場とん 矢場町本店", img:"yabaton",
+   dish:"와라지 톤카츠 · 미소카츠 정식",
+   ds:"나고야 미소카츠의 대표. <b>아이 동반 OK</b>이고 소스를 따로 주기 때문에 아이 몫은 미소 없이 그냥 돈카츠로 줄 수 있어요. 포켓몬센터(야바초)에서 <b>도보 5분</b>이라 첫날 동선에 그대로 들어갑니다.",
+   facts:[["시간","11:00–21:00 (L.O. 20:00)"],["휴무","연중무휴 (연말연시 제외)"],["예약","<b>넷 예약 가능</b> — 전날 17시까지"],["가는 법","야바초역 4번 출구 도보 5분"]],
+   map:"矢場とん 矢場町本店",
+   src:[["예약·정보","https://www.hotpepper.jp/strJ000107401/"]]},
+  {id:"sugakiya", name:"스가키야 (에스카점)", ja:"スガキヤ 名古屋駅エスカ店", img:"sugakiya",
+   dish:"라멘 + 소프트크림",
+   ds:"나고야 아이들이 자라면서 먹는 <b>국민 라멘</b>. 한 그릇 ¥490에 소프트크림까지 붙여도 천 엔이 안 넘어요. 국물이 순해서 매운 걸 못 먹는 아이도 문제없고, 회전이 빨라 웨이팅이 짧습니다.",
+   facts:[["시간","7:30–21:00 (L.O. 20:30)"],["가격","라멘 ¥490 · 세트 ¥890"],["예약","불필요 · 30석"],["가는 법","나고야역 신칸센口 지하 에스카 B1"]],
+   map:"スガキヤ 名古屋駅エスカ店",
+   src:[["에스카 공식","https://www.esca-sc.com/shop_guide/116/"]]},
+  {id:"tenmusu", name:"텐무스 센주", ja:"めいふつ天むす 千寿", img:"tenmusu",
+   dish:"천무스 (새우튀김 주먹밥)",
+   ds:"한 입 크기 새우튀김 주먹밥. <b>포장해서 걸어다니며</b> 먹기 좋아 오스 구경이나 이동 중 간식으로 최적이에요. 이트인은 12:00–14:00만 되니 사실상 테이크아웃 전문으로 보면 됩니다.",
+   facts:[["이트인","12:00–14:00만"],["형태","포장 중심 · 5개들이"],["예약","수량 많으면 전화 예약 권장"],["가는 법","오스 상점가 안"]],
+   map:"めいふつ天むす 千寿 大須本店",
+   src:[["나고야시 관광","https://www.nagoya-info.jp/gourmet/detail/21/"]]}]},
+
+ {slot:"저녁", icon:"🌙", note:"저녁은 <b>예약이 되는 곳</b> 위주로. 나고야는 인기점 웨이팅이 길어서 아이 데리고 서 있는 게 제일 힘들어요.",
+  items:[
+  {id:"tebasaki", name:"세계의 야마짱 본점", ja:"世界の山ちゃん 本店", img:"tebasaki",
+   dish:"환상의 테바사키 (닭날개 튀김)",
+   ds:"나고야 테바사키의 양대 산맥. <b>LINE·전화 예약</b>이 되고 사카에역에서 걸어갑니다. 후추가 세니 아이 몫은 <b>“코쇼 누키(후추 빼고)”</b>로 부탁하세요. 이자카야라 저녁 시간대만 엽니다.",
+   facts:[["시간","월~금 16:00–23:15 · 토 15:00–0:15 · 일·축 15:00–23:15"],["휴무","연중무휴"],["예약","<b>전화 052-242-1342 · LINE 예약</b>"],["가는 법","사카에역 12번 출구 도보 5분"]],
+   map:"世界の山ちゃん 本店",
+   src:[["공식","https://yamachan.co.jp/shop/aichi/honten.php"]]},
+  {id:"hitsumabushi", name:"아츠타 호라이켄 마츠자카야점", ja:"あつた蓬莱軒 松坂屋店", img:"hitsumabushi",
+   dish:"히츠마부시 (장어덮밥 3단 먹기)",
+   ds:"나고야 최고 명물. 백화점 10층 지점이라 본점보다 접근이 쉽고 <b>예약을 받습니다</b>. 잘게 썬 장어라 아이도 먹기 편해요. <b>12/29(화)는 정기휴일</b>이지만 그날은 레고랜드라 상관없고, 12/28·30·31 중에 넣으면 됩니다.",
+   facts:[["시간","평일 11:00–14:30 / 16:30–20:30 · 토일 11:00–20:30 (L.O.)"],["휴무","<b>매주 화요일</b> (12/29 해당)"],["예약","<b>가능</b> · 050-5785-4308"],["가는 법","마츠자카야 나고야점 남관 10F (야바초역 직결)"]],
+   map:"あつた蓬莱軒 松坂屋店",
+   src:[["공식","https://www.houraiken.com/matsuzakaya/access.html"]]},
+  {id:"ebifurai", name:"마루하 식당 (센트레아점)", ja:"まるは食堂 中部国際空港店", img:"ebifurai",
+   dish:"점보 새우튀김 정식",
+   ds:"나고야는 <b>새우튀김</b>도 명물인데, 이 집은 팔뚝만 한 크기로 유명해요. 센트레아 <b>제1터미널 4층</b>이라 마지막 날 Flight of Dreams 보고 <b>비행기 타기 전 마지막 식사</b>로 딱입니다.",
+   facts:[["시간","10:00~ (공항 영업시간)"],["위치","센트레아 제1터미널 4F 식당가"],["예약","불필요"],["동선","여기 먹고 <b>제2터미널로 도보 8분</b>"]],
+   map:"まるは食堂 中部国際空港店",
+   src:[["레티","https://retty.me/area/PRE23/ARE74/SUB60601/100000057715/"]]}]},
+
+ {slot:"간식 · 기념", icon:"🍮", note:"", items:[
+  {id:"piyorin", name:"피요링", ja:"ぴよりん", img:"piyorin",
+   dish:"병아리 모양 푸딩 케이크",
+   ds:"나고야역 명물. <b>아이가 제일 좋아할 기념품</b>인데 열에 약하고 잘 무너져서 “피요링 챌린지”라는 말이 있을 정도예요. 그날그날 <b>1시간이면 매진</b>이라 온라인 예약(스마트피요약)을 걸어두고 받아가는 게 확실합니다.",
+   facts:[["ぴよりんvillage","물판 6:30–21:30 · 카페 7:00–22:00"],["ぴよりんshop","9:00–20:00 (우마이몬도리 히로코지口)"],["예약","<b>온라인 예약 후 수령 가능</b>"],["주의","상온에서 금방 녹음 — 귀국 당일 구매 권장"]],
+   map:"ぴよりんshop 名古屋駅",
+   src:[["공식","https://piyorin.com/"]]}]}
+];
 
 const ITINERARY = [
   {d:"12/28",w:"월",t:"한국 → 나고야 도착 → 사카에",s:"대한항공 KE745 · ICN T2 10:35 → NGO T1 12:30 · μ-SKY로 나고야역 28~37분 · 오아시스21 · 포켓몬센터 나고야(나고야 PARCO 동관 2F, 야바초역 직결) · 저녁·쇼핑",note:"입국·수하물 포함 시내 14시 전후 도착 예상 → 체크인 후 오후 일정으로 충분. 포켓몬센터 10:00–21:00, 연중무휴(연말 시간 변동 가능)",ok:true},
@@ -598,6 +830,64 @@ const share=async()=>{const d={title:"나고야 가족여행 숙소 고르기 �
  if(navigator.share){try{await navigator.share(d)}catch(e){}}else{copy();toast("링크를 복사했어요 — 카카오톡에 붙여넣기")}};
 document.getElementById("btnShare").onclick=share;document.getElementById("btnCopy").onclick=copy;
 document.querySelectorAll("[data-share]").forEach(b=>b.onclick=share);document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=copy);
+/* spots & meals ------------------------------------------------------- */
+const gmap = q => "https://www.google.com/maps/search/?api=1&query=" + encodeURIComponent(q);
+/* 사진 크레딧(위키미디어 커먼즈). img/CREDITS.json 과 같은 내용을 인라인해 로컬에서도 표시됨 */
+const CRED = {"legoland":{"file":"LEGOLAND Japan - 53400777071.jpg","author":"othree","license":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","page":"https://commons.wikimedia.org/wiki/File:LEGOLAND_Japan_-_53400777071.jpg"},"aquarium":{"file":"Port of Nagoya Public Aquarium (Minato-ku, Nagoya) VLux5 hdsr 08.jpg","author":"Hyppolyte de Saint-Rambert","license":"CC BY 4.0","licUrl":"https://creativecommons.org/licenses/by/4.0","page":"https://commons.wikimedia.org/wiki/File:Port_of_Nagoya_Public_Aquarium_(Minato-ku,_Nagoya)_VLux5_hdsr_08.jpg"},"oasis21":{"file":"Oasis 21 ＆ Nagoya TV Tower.jpg","author":"Nryate","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Oasis_21_%EF%BC%86_Nagoya_TV_Tower.jpg"},"miraitower":{"file":"Nagoya TV Tower 4.JPG","author":"Brücke-Osteuropa","license":"CC0","licUrl":"http://creativecommons.org/publicdomain/zero/1.0/deed.en","page":"https://commons.wikimedia.org/wiki/File:Nagoya_TV_Tower_4.JPG"},"fuji":{"file":"南極観測船「ふじ」 - panoramio.jpg","author":"kcomiida","license":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","page":"https://commons.wikimedia.org/wiki/File:%E5%8D%97%E6%A5%B5%E8%A6%B3%E6%B8%AC%E8%88%B9%E3%80%8C%E3%81%B5%E3%81%98%E3%80%8D_-_panoramio.jpg"},"fod":{"file":"Boeing 787-8 Dreamliner - Prototype N787BA preserved in Nagoya (Flight of Dreams).jpg","author":"Samson Ng . D201@EAL","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Boeing_787-8_Dreamliner_-_Prototype_N787BA_preserved_in_Nagoya_(Flight_of_Dreams).jpg"},"osu":{"file":"大須商店街IMG 20220316 161800 03.jpg","author":"経済特区","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:%E5%A4%A7%E9%A0%88%E5%95%86%E5%BA%97%E8%A1%97IMG_20220316_161800_03.jpg"},"skyboat":{"file":"Ferris wheel of Sunshine Sakae at night 20150124.jpg","author":"そらみみ","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Ferris_wheel_of_Sunshine_Sakae_at_night_20150124.jpg"},"jrct":{"file":"Nagoya Station JR Central Towers and JR Gate Tower.jpg","author":"FZHS","license":"CC0","licUrl":"http://creativecommons.org/publicdomain/zero/1.0/deed.en","page":"https://commons.wikimedia.org/wiki/File:Nagoya_Station_JR_Central_Towers_and_JR_Gate_Tower.jpg"},"seatrain":{"file":"Nagoya port Sea-Train Land - 2.jpg","author":"KKPCW（Kyu3）","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Nagoya_port_Sea-Train_Land_-_2.jpg"},"makerspier":{"file":"Maker's Pier 20170422-05.jpg","author":"円周率３パーセント (Enshuritsu 3 percent)","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Maker%27s_Pier_20170422-05.jpg"},"yabaton":{"file":"矢場とん わらじとんかつ, (15830121946).jpg","author":"bryan...","license":"CC BY-SA 2.0","licUrl":"https://creativecommons.org/licenses/by-sa/2.0","page":"https://commons.wikimedia.org/wiki/File:%E7%9F%A2%E5%A0%B4%E3%81%A8%E3%82%93_%E3%82%8F%E3%82%89%E3%81%98%E3%81%A8%E3%82%93%E3%81%8B%E3%81%A4,_(15830121946).jpg"},"hitsumabushi":{"file":"Hitsumabushi1.jpg","author":"Kanesue","license":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","page":"https://commons.wikimedia.org/wiki/File:Hitsumabushi1.jpg"},"kishimen":{"file":"CodazziKishimen2.jpg","author":"No machine-readable author provided. 小太刀~commonswiki assumed","license":"CC BY-SA 3.0","licUrl":"http://creativecommons.org/licenses/by-sa/3.0/","page":"https://commons.wikimedia.org/wiki/File:CodazziKishimen2.jpg"},"tebasaki":{"file":"Sekai no Yamachan tebasaki.JPG","author":"Nissy-KITAQ","license":"CC BY-SA 3.0","licUrl":"https://creativecommons.org/licenses/by-sa/3.0","page":"https://commons.wikimedia.org/wiki/File:Sekai_no_Yamachan_tebasaki.JPG"},"ogura":{"file":"Nagoya \"morning set\" 小倉トースト.jpg","author":"Hajime NAKANO","license":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","page":"https://commons.wikimedia.org/wiki/File:Nagoya_%22morning_set%22_%E5%B0%8F%E5%80%89%E3%83%88%E3%83%BC%E3%82%B9%E3%83%88.jpg"},"komeda":{"file":"Komeda's Morning Set 20200805.jpg","author":"円周率３パーセント","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Komeda%27s_Morning_Set_20200805.jpg"},"tenmusu":{"file":"Tenmusu Senju Kita 20161107.jpg","author":"円周率３パーセント (Enshuritsu 3 percent)","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Tenmusu_Senju_Kita_20161107.jpg"},"sugakiya":{"file":"スガキヤラーメン (28652269658).jpg","author":"Kanesue from Japan","license":"CC BY 2.0","licUrl":"https://creativecommons.org/licenses/by/2.0","page":"https://commons.wikimedia.org/wiki/File:%E3%82%B9%E3%82%AC%E3%82%AD%E3%83%A4%E3%83%A9%E3%83%BC%E3%83%A1%E3%83%B3_(28652269658).jpg"},"piyorin":{"file":"Piyorin.jpg","author":"Cyukon","license":"CC BY-SA 4.0","licUrl":"https://creativecommons.org/licenses/by-sa/4.0","page":"https://commons.wikimedia.org/wiki/File:Piyorin.jpg"},"ebifurai":{"file":"Ebi Fry 001.jpg","author":"Ocdp","license":"CC0","licUrl":"http://creativecommons.org/publicdomain/zero/1.0/deed.en","page":"https://commons.wikimedia.org/wiki/File:Ebi_Fry_001.jpg"}};
+const ncChip = s => s==="open" ? ["c-ok","영업"] : s==="closed" ? ["c-no","휴관"] : ["c-warn","확인 필요"];
+
+const photo = (o, badge, badgeCls) => {
+  const c = CRED[o.img];
+  return `<div class="ph"><img src="img/${o.img}.jpg" alt="${o.name}" loading="lazy" decoding="async">
+    ${badge?`<span class="badge ${badgeCls||''}">${badge}</span>`:""}
+    ${c?`<span class="cr">${c.author} / ${c.license}</span>`:""}</div>`;
+};
+
+const factRows = f => `<div class="facts">${f.map(([k,v])=>`<div><dt>${k}</dt><b>${v}</b></div>`).join("")}</div>`;
+const srcRow = a => `<div class="src">출처: ${a.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join(" · ")}</div>`;
+
+const spotCard = o => {
+  const [cls, txt] = ncChip(o.nc);
+  return `<article class="card ${o.must?'must':''}">
+   ${photo(o, o.badge, o.must?'must':'')}
+   <div class="cd">
+     <div class="nm">${o.name}<small>${o.ja}</small></div>
+     <div class="chips"><span class="chip ${cls}">연말 ${txt}</span></div>
+     <p class="ds">${o.ds}</p>
+     ${factRows(o.facts)}
+     <p class="ds" style="font-size:12.5px"><b>예약·발권</b> — ${o.book}</p>
+     <div class="cta"><a class="go" href="${gmap(o.map)}" target="_blank" rel="noopener">📍 지도</a>${o.src.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join("")}</div>
+     <div class="tiny">${o.ncTxt}</div>
+   </div></article>`;
+};
+
+const mealCard = o => `<article class="card">
+   ${photo(o, o.dish, '')}
+   <div class="cd">
+     <div class="nm">${o.name}<small>${o.ja}</small></div>
+     <p class="ds">${o.ds}</p>
+     ${factRows(o.facts)}
+     <div class="cta"><a class="go" href="${gmap(o.map)}" target="_blank" rel="noopener">📍 지도</a>${o.src.map(([t,u])=>`<a href="${u}" target="_blank" rel="noopener">${t}</a>`).join("")}</div>
+   </div></article>`;
+
+function draw(){
+  document.getElementById("closedBox").innerHTML =
+    `<h4>⚠ 연말 휴관 — 먼저 읽어주세요</h4><p style="margin:0 0 8px">${CLOSED_YEAREND.note}</p><ul>` +
+    CLOSED_YEAREND.list.map(([n,w,d,u])=>`<li><b>${n}</b> — ${w}. ${d} <a href="${u}" target="_blank" rel="noopener" style="color:var(--ink3)">확인</a></li>`).join("") +
+    `</ul>`;
+  document.getElementById("spotsMust").innerHTML = SPOTS.filter(s=>s.must).map(spotCard).join("");
+  document.getElementById("spotsMore").innerHTML = SPOTS.filter(s=>!s.must).map(spotCard).join("");
+  document.getElementById("meals").innerHTML = MEALS.map(m=>`
+    <div class="subhead"><span class="mealtag">${m.icon} ${m.slot}</span></div>
+    ${m.note?`<p class="ds" style="margin:0 0 10px;font-size:13px;color:var(--ink2)">${m.note}</p>`:""}
+    <div class="cards">${m.items.map(mealCard).join("")}</div>`).join("");
+  const cr = Object.values(CRED);
+  if(cr.length) document.getElementById("foot").insertAdjacentHTML("beforeend",
+    `<div class="credits">사진 출처: 위키미디어 커먼즈 — ` +
+    cr.map(c=>`<a href="${c.page}" target="_blank" rel="noopener">${c.file}</a> (${c.author}, ${c.license})`).join(" · ") +
+    `</div>`);
+}
+draw();
 </script>
 
 </body></html>
