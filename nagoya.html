@@ -1,0 +1,563 @@
+<!doctype html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>나고야 가족여행 숙소 고르기</title>
+<meta property="og:title" content="나고야 가족여행 숙소 고르기 🇯🇵">
+<meta property="og:description" content="2026.12.28–31 · 두 가족의 숙소 후보를 비교해봤어요">
+<meta property="og:type" content="website">
+<meta name="description" content="2026.12.28–31 나고야 가족여행, 두 가족(성인 4·아이 2)의 숙소 후보 7곳을 일정·동선·커넥팅룸·가격 기준으로 비교한 페이지">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Outfit:wght@500;600;700;800&display=swap">
+<style>
+:root{
+  --bg:#F5F7FA; --surface:#FFFFFF; --surface2:#EEF2F7; --line:#DCE3EC;
+  --ink:#16243A; --ink2:#4B5A70; --ink3:#7C889B;
+  --accent:#0E6F8E; --accent-ink:#FFFFFF; --accent-soft:#DDEFF5;
+  --amber:#D98E1F; --amber-soft:#FBEFD9;
+  --ok:#1E8A5A; --ok-soft:#DDF3E7; --warn:#B7791F; --warn-soft:#FBEFD9; --no:#B23A3A; --no-soft:#F8E1E1;
+  --gold:#C9A227; --silver:#8E98A8; --bronze:#B0743A;
+  --shadow:0 1px 2px rgba(22,36,58,.06),0 6px 20px rgba(22,36,58,.06);
+  --r:14px;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#0F1621; --surface:#171F2B; --surface2:#1F2937; --line:#2B3647;
+    --ink:#EDF1F6; --ink2:#B6C0CE; --ink3:#7F8B9C;
+    --accent:#4FB3D3; --accent-ink:#0B1A22; --accent-soft:#12303B;
+    --amber:#E8A94A; --amber-soft:#3A2C13;
+    --ok:#4CC58A; --ok-soft:#153426; --warn:#E0A94D; --warn-soft:#3A2C13; --no:#E27070; --no-soft:#3C1E1E;
+    --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#0F1621; --surface:#171F2B; --surface2:#1F2937; --line:#2B3647;
+  --ink:#EDF1F6; --ink2:#B6C0CE; --ink3:#7F8B9C;
+  --accent:#4FB3D3; --accent-ink:#0B1A22; --accent-soft:#12303B;
+  --amber:#E8A94A; --amber-soft:#3A2C13;
+  --ok:#4CC58A; --ok-soft:#153426; --warn:#E0A94D; --warn-soft:#3A2C13; --no:#E27070; --no-soft:#3C1E1E;
+  --shadow:0 1px 2px rgba(0,0,0,.4),0 8px 24px rgba(0,0,0,.35);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:"Noto Sans KR",-apple-system,"Apple SD Gothic Neo","Malgun Gothic",system-ui,sans-serif;font-size:15px;line-height:1.6;}
+.num,.score,h1,.big{font-family:"Outfit","Noto Sans KR",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+a{color:var(--accent)}
+.wrap{max-width:760px;margin:0 auto;padding:0 16px 80px}
+h1,h2,h3{text-wrap:balance;margin:0}
+h2{font-size:22px;font-weight:800;letter-spacing:-.01em;line-height:1.25}
+h3{font-size:16px;font-weight:700}
+.eyebrow{font-size:11px;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent)}
+.muted{color:var(--ink2)}
+.tiny{font-size:12px;color:var(--ink3)}
+section{margin-top:44px}
+.sec-head{display:flex;flex-direction:column;gap:6px;margin-bottom:16px}
+.sec-head p{margin:0;color:var(--ink2)}
+
+/* hero */
+.hero{padding:36px 0 8px}
+.hero .flag{font-size:12px;font-weight:700;letter-spacing:.18em;color:var(--ink2)}
+.hero h1{font-size:40px;font-weight:800;line-height:1.05;letter-spacing:-.02em;margin:6px 0 10px}
+.hero .dates{font-size:20px;font-weight:600;color:var(--ink)}
+.hero .party{color:var(--ink2);margin-top:2px}
+.hero .ask{margin-top:22px;font-size:26px;font-weight:900;letter-spacing:-.01em}
+.hero .ask span{background:linear-gradient(transparent 62%,var(--accent-soft) 62%)}
+.share{display:flex;gap:8px;margin-top:18px;flex-wrap:wrap}
+.btn{appearance:none;border:1px solid var(--line);background:var(--surface);color:var(--ink);border-radius:999px;padding:9px 14px;font-size:13px;font-weight:700;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px;line-height:1}
+.btn.primary{background:var(--accent);color:var(--accent-ink);border-color:var(--accent)}
+.btn:focus-visible{outline:2px solid var(--accent);outline-offset:2px}
+.toast{position:fixed;left:50%;bottom:24px;transform:translateX(-50%) translateY(20px);background:var(--ink);color:var(--bg);padding:10px 16px;border-radius:999px;font-size:13px;opacity:0;transition:.25s;pointer-events:none;z-index:50}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+/* nav */
+.nav{position:sticky;top:0;z-index:20;background:var(--bg);padding:10px 0;margin:16px -16px 0;padding-left:16px;overflow-x:auto;white-space:nowrap;scrollbar-width:none;border-bottom:1px solid var(--line)}
+.nav::-webkit-scrollbar{display:none}
+.nav a{display:inline-block;padding:6px 12px;border-radius:999px;background:var(--surface2);color:var(--ink2);font-size:12px;font-weight:700;text-decoration:none;margin-right:6px}
+.nav a:last-child{margin-right:16px}
+
+/* flight notice */
+.notice{margin-top:18px;border:1px dashed var(--amber);background:var(--amber-soft);border-radius:12px;padding:12px 14px;font-size:13px;color:var(--ink)}
+.notice b{color:var(--amber)}
+
+/* timeline */
+.tl{display:grid;gap:10px}
+.day{display:grid;grid-template-columns:64px 1fr;gap:12px;background:var(--surface);border-radius:var(--r);padding:14px;box-shadow:var(--shadow)}
+.day .d{font-family:"Outfit";font-weight:800;font-size:15px;line-height:1.1}
+.day .d small{display:block;font-weight:600;color:var(--ink3);font-size:11px;margin-top:2px}
+.day .t{font-weight:700}
+.day .s{color:var(--ink2);font-size:13px;margin-top:2px}
+.day .w{margin-top:6px;font-size:12px;color:var(--warn);}
+.day .w.ok{color:var(--ok)}
+
+/* area */
+.areas{display:grid;gap:12px}
+@media(min-width:640px){.areas{grid-template-columns:1fr 1fr}}
+.area{background:var(--surface);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);border:1px solid transparent;position:relative}
+.area.rec{border-color:var(--accent)}
+.area .tag{position:absolute;top:12px;right:12px;background:var(--accent);color:var(--accent-ink);font-size:11px;font-weight:800;padding:4px 9px;border-radius:999px}
+.area .tag.alt{background:var(--amber-soft);color:var(--amber)}
+.area h3{font-size:18px;margin-bottom:8px}
+.area .grid{display:grid;grid-template-columns:1fr 1fr;gap:6px 10px;font-size:13px;margin:8px 0 10px}
+.area .grid div{display:flex;justify-content:space-between;gap:8px;border-bottom:1px solid var(--line);padding:4px 0}
+.area .grid b{font-family:"Outfit";font-weight:700}
+.area ul{margin:0;padding-left:16px;font-size:13px;color:var(--ink2)}
+.area ul li{margin:2px 0}
+.verdict{margin-top:14px;background:var(--accent);color:var(--accent-ink);border-radius:var(--r);padding:18px}
+.verdict h3{font-size:20px;color:inherit;margin-bottom:6px}
+.verdict p{margin:0;font-size:14px;opacity:.95}
+
+/* tiers */
+.tiers{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:12px}
+.tier-pill{font-size:12px;font-weight:700;padding:5px 10px;border-radius:999px;background:var(--surface2);color:var(--ink2)}
+.tier-pill i{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px;vertical-align:1px}
+.t-value i{background:var(--ok)} .t-mid i{background:var(--accent)} .t-prem i{background:var(--amber)}
+
+/* top picks */
+.picks{display:grid;gap:14px}
+.pick{background:var(--surface);border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+.pick .banner{padding:14px 18px 14px;color:#fff;display:flex;flex-direction:column;gap:10px}
+.pick .banner .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pick .banner .lbl{font-size:12px;font-weight:800;letter-spacing:.06em;background:rgba(255,255,255,.18);backdrop-filter:blur(4px);padding:4px 10px;border-radius:999px}
+.pick .banner .sc{text-align:right;line-height:1}
+.pick .banner .sc .score{font-size:34px;font-weight:800}
+.pick .banner .sc small{display:block;font-size:10px;opacity:.8;letter-spacing:.1em}
+.pick .banner h3{font-size:21px;color:#fff;line-height:1.15}
+.pick .banner .ja{font-size:12px;opacity:.8}
+.pick .body{padding:14px 18px 18px}
+.kpis{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-bottom:12px}
+.kpi{background:var(--surface2);border-radius:10px;padding:8px 6px;text-align:center}
+.kpi .v{font-family:"Outfit";font-weight:800;font-size:15px;line-height:1.1}
+.kpi .k{font-size:10px;color:var(--ink3);margin-top:3px;letter-spacing:.04em}
+.why{font-size:14px;color:var(--ink2);margin:0}
+.why b{color:var(--ink)}
+.chips{display:flex;gap:6px;flex-wrap:wrap;margin-top:10px}
+.chip{font-size:11px;font-weight:700;padding:4px 9px;border-radius:999px}
+.c-ok{background:var(--ok-soft);color:var(--ok)} .c-warn{background:var(--warn-soft);color:var(--warn)} .c-no{background:var(--no-soft);color:var(--no)} .c-info{background:var(--accent-soft);color:var(--accent)}
+
+/* comparison */
+.cmp-cards{display:grid;gap:10px}
+.cmp{background:var(--surface);border-radius:var(--r);padding:12px 14px;box-shadow:var(--shadow);display:grid;grid-template-columns:1fr auto;gap:6px 10px;align-items:center}
+.cmp .n{font-weight:700}
+.cmp .n small{display:block;font-weight:500;color:var(--ink3);font-size:12px}
+.cmp .sc{font-family:"Outfit";font-weight:800;font-size:24px;text-align:right;line-height:1}
+.cmp .sc small{display:block;font-size:10px;color:var(--ink3);font-weight:600}
+.cmp .row{grid-column:1/-1;display:grid;grid-template-columns:repeat(4,1fr);gap:6px;font-size:12px;border-top:1px solid var(--line);padding-top:8px}
+.cmp .row div span{display:block;color:var(--ink3);font-size:10px}
+.cmp .row div b{font-family:"Outfit";font-weight:700;font-size:13px}
+.cmp .price{grid-column:1/-1;font-size:13px;color:var(--ink2)}
+.cmp .price b{font-family:"Outfit";font-size:16px;color:var(--ink)}
+table.cmpt{display:none;width:100%;border-collapse:collapse;font-size:13px;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+table.cmpt th,table.cmpt td{padding:10px 8px;border-bottom:1px solid var(--line);text-align:left;vertical-align:top}
+table.cmpt th{font-size:11px;letter-spacing:.06em;color:var(--ink3);text-transform:uppercase;background:var(--surface2)}
+table.cmpt td.num{font-family:"Outfit";font-weight:700}
+@media(min-width:720px){.cmp-cards{display:none}table.cmpt{display:table}}
+
+/* detail */
+.hotels{display:grid;gap:12px}
+details.h{background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow);overflow:hidden}
+details.h summary{list-style:none;cursor:pointer;padding:14px 16px;display:grid;grid-template-columns:44px 1fr auto;gap:12px;align-items:center}
+details.h summary::-webkit-details-marker{display:none}
+.mono{width:44px;height:44px;border-radius:12px;color:#fff;display:flex;align-items:center;justify-content:center;font-family:"Outfit";font-weight:800;font-size:18px}
+details.h summary .t{font-weight:700;line-height:1.2}
+details.h summary .t small{display:block;font-weight:500;color:var(--ink3);font-size:12px;margin-top:2px}
+details.h summary .sc{font-family:"Outfit";font-weight:800;font-size:22px}
+details.h[open] summary{border-bottom:1px solid var(--line)}
+.hb{padding:14px 16px 18px;display:grid;gap:14px}
+.hb h4{margin:0 0 6px;font-size:13px;letter-spacing:.06em;color:var(--accent);text-transform:uppercase}
+.kv{display:grid;grid-template-columns:96px 1fr;gap:4px 10px;font-size:13px}
+.kv dt{color:var(--ink3)}
+.kv dd{margin:0}
+.route{display:grid;gap:6px}
+.route div{display:grid;grid-template-columns:28px 1fr auto;gap:8px;align-items:center;font-size:13px;background:var(--surface2);border-radius:10px;padding:8px 10px}
+.route div b{font-family:"Outfit";font-weight:700;white-space:nowrap}
+.route div span{color:var(--ink2);font-size:12px}
+.pc{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.pc ul{margin:0;padding-left:16px;font-size:13px}
+.pc .pro li{color:var(--ink)} .pc .con li{color:var(--ink2)}
+.pricebox{background:var(--surface2);border-radius:12px;padding:12px}
+.pricebox .big{font-size:26px;font-weight:800;line-height:1}
+.pricebox .sub{font-size:12px;color:var(--ink2);margin-top:4px}
+.links{display:flex;gap:8px;flex-wrap:wrap}
+.src{font-size:11px;color:var(--ink3);line-height:1.5}
+.src a{color:var(--ink3)}
+.scorebar{display:grid;gap:4px;font-size:12px}
+.scorebar div{display:grid;grid-template-columns:120px 1fr 36px;gap:8px;align-items:center}
+.scorebar i{display:block;height:6px;border-radius:3px;background:var(--surface2);overflow:hidden}
+.scorebar i b{display:block;height:100%;background:var(--accent)}
+.scorebar span{text-align:right;font-family:"Outfit";font-weight:700}
+
+/* travel matrix */
+.mtx{overflow-x:auto;background:var(--surface);border-radius:var(--r);box-shadow:var(--shadow)}
+.mtx table{border-collapse:collapse;width:100%;min-width:520px;font-size:13px}
+.mtx th,.mtx td{padding:10px 10px;border-bottom:1px solid var(--line);text-align:center}
+.mtx th:first-child,.mtx td:first-child{text-align:left;position:sticky;left:0;background:var(--surface)}
+.mtx thead th{font-size:12px;color:var(--ink3);background:var(--surface2)}
+.mtx td .m{font-family:"Outfit";font-weight:800;font-size:16px}
+.mtx td .x{display:block;font-size:10px;color:var(--ink3)}
+.mtx td.best .m{color:var(--ok)}
+
+/* final */
+.final{display:grid;gap:10px}
+.rank{background:var(--surface);border-radius:var(--r);padding:16px;box-shadow:var(--shadow);display:grid;grid-template-columns:auto 1fr;gap:14px;align-items:start}
+.rank .medal{font-size:30px;line-height:1}
+.rank h3{font-size:17px}
+.rank p{margin:4px 0 0;font-size:13px;color:var(--ink2)}
+.rank .cond{margin-top:8px;font-size:13px;background:var(--surface2);border-radius:10px;padding:10px 12px}
+.conclusion{margin-top:16px;background:var(--ink);color:var(--bg);border-radius:18px;padding:22px 20px}
+.conclusion .eyebrow{color:var(--amber)}
+.conclusion h3{font-size:24px;color:inherit;margin:6px 0 8px;line-height:1.2}
+.conclusion p{margin:0;font-size:14px;opacity:.9}
+.foot{margin-top:40px;font-size:12px;color:var(--ink3);line-height:1.6}
+@media (prefers-reduced-motion: reduce){.toast{transition:none}}
+</style>
+</head>
+<body>
+
+<div class="wrap">
+
+<header class="hero">
+  <div class="flag">🇯🇵 NAGOYA FAMILY TRIP</div>
+  <h1>나고야 가족여행<br>숙소 고르기</h1>
+  <div class="dates num">2026.12.28 — 12.31 <span class="muted" style="font-size:14px">· 3박</span></div>
+  <div class="party">2 Families · 4 Adults · 2 Kids (7세) · 객실 2개</div>
+  <div class="ask"><span>“우리 어디서 잘까?”</span></div>
+  <div class="share">
+    <button class="btn primary" id="btnShare">💬 카카오톡으로 공유</button>
+    <button class="btn" id="btnCopy">🔗 링크 복사</button>
+  </div>
+  <div class="notice" id="flightNotice"></div>
+</header>
+
+<nav class="nav" aria-label="섹션 이동">
+  <a href="#s1">일정</a><a href="#s2">지역 선택</a><a href="#s3">TOP PICKS</a><a href="#s4">비교표</a><a href="#s5">상세</a><a href="#s6">이동시간</a><a href="#s7">Final</a>
+</nav>
+
+<!-- 1. itinerary -->
+<section id="s1">
+  <div class="sec-head"><span class="eyebrow">Section 1</span><h2>여행 일정 요약</h2><p>현재 예상 일정. 아직 바뀔 수 있어서 “조금 바뀌어도 교통이 편한 위치”에 가점을 줬어요.</p></div>
+  <div class="tl" id="timeline"></div>
+</section>
+
+<!-- 2. area -->
+<section id="s2">
+  <div class="sec-head"><span class="eyebrow">Section 2</span><h2>숙소 지역 선택</h2><p>호텔을 고르기 전에, 우리 일정의 실제 대중교통 동선으로 베이스 지역부터 비교했어요.</p></div>
+  <div class="areas" id="areas"></div>
+  <div class="verdict">
+    <div class="eyebrow" style="color:inherit;opacity:.85">추천 베이스</div>
+    <h3>🚉 나고야역(메이에키) — 단, 가나야마도 진지한 대안</h3>
+    <p>우리 일정에서 나고야역은 <b>공항·레고랜드·사카에가 모두 환승 0회</b>고, 수족관만 1회 환승(가나야마)이에요. 4일 중 가장 긴 하루(레고랜드)를 무환승 24분으로 다녀오고, 마지막 날 캐리어를 끌고 μ-SKY를 바로 타는 게 결정적이에요. 가나야마는 공항·수족관·사카에·포켓몬센터가 전부 직통이라 레고랜드(1회 환승)만 빼면 오히려 더 편해서, ‘역 바로 앞 호텔’이라면 후보로 넣을 가치가 충분해요. 사카에는 첫날만 편하고 공항·레고랜드 모두 나고야역을 거쳐야 해서 베이스로는 비추천.</p>
+  </div>
+</section>
+
+<!-- 3. top picks -->
+<section id="s3">
+  <div class="sec-head"><span class="eyebrow">Section 3</span><h2>TOP PICKS</h2><p>예산 부담을 고려한 실질 추천 3곳. 점수는 우리 일정 기준 100점 만점(아래 상세에서 근거 확인).</p></div>
+  <div class="tiers"><span class="tier-pill t-value"><i></i>가성비 ~₩180만</span><span class="tier-pill t-mid"><i></i>중간 ₩180만~260만</span><span class="tier-pill t-prem"><i></i>프리미엄 ₩260만+</span><span class="tiny" style="align-self:center">(2객실·3박 원화 총액, 100엔=₩858)</span></div>
+  <div class="picks" id="picks"></div>
+</section>
+
+<!-- 4. comparison -->
+<section id="s4">
+  <div class="sec-head"><span class="eyebrow">Section 4</span><h2>전체 숙소 비교표</h2><p>1차 조사 12곳 중 최종 7곳. 가격은 2객실·3박 원화 총액(100엔=₩858 환산), 이동시간은 대중교통 기준 대략치.</p></div>
+  <div class="cmp-cards" id="cmpCards"></div>
+  <table class="cmpt" id="cmpTable"></table>
+  <p class="tiny" style="margin-top:10px" id="dropped"></p>
+</section>
+
+<!-- 5. detail -->
+<section id="s5">
+  <div class="sec-head"><span class="eyebrow">Section 5</span><h2>호텔별 상세 분석</h2><p>눌러서 펼치면 객실·아이 투숙·커넥팅룸·교통·가격·장단점과 확인 출처가 나와요.</p></div>
+  <div class="hotels" id="hotels"></div>
+</section>
+
+<!-- 6. travel matrix -->
+<section id="s6">
+  <div class="sec-head"><span class="eyebrow">Section 6</span><h2>우리 일정 기준 이동 비교</h2><p>호텔 출발, 대중교통 기준 대략 소요시간(분)과 환승 횟수. 초록 = 해당 목적지 최단.</p></div>
+  <div class="mtx"><table id="matrix"></table></div>
+</section>
+
+<!-- 7. final -->
+<section id="s7">
+  <div class="sec-head"><span class="eyebrow">Section 7</span><h2>Final Choice</h2><p>“내가 실제로 예약한다면” — 의사결정용 결론.</p></div>
+  <div class="final" id="final"></div>
+  <div class="conclusion">
+    <div class="eyebrow">결론적으로 우리는 여기</div>
+    <h3>나고야 프린스 호텔 스카이타워 — 커넥팅 스카이트윈 2실</h3>
+    <p>두 가족이 문 하나로 오가는 <b>공식 커넥팅룸</b>(32.8㎡×2, 32층 이상)이고, 레고랜드까지 지하철 한 번에 22분, 2객실·3박 약 ₩240만으로 프리미엄 3곳보다 ₩40만~120만 저렴해요. 단점(공항·수족관 이동 시 환승 1회 또는 도보 17분)은 첫날·마지막 날 택시 1회(₩2만 안팎)로 상쇄 가능. <b>예약은 전화(052-565-1110)</b>로만 커넥팅 확약이 되니, 결정되면 바로 전화하는 게 순서예요.</p>
+  </div>
+  <div class="share" style="margin-top:16px">
+    <button class="btn primary" data-share>💬 카카오톡으로 공유</button>
+    <button class="btn" data-copy>🔗 링크 복사</button>
+  </div>
+</section>
+
+<footer class="foot" id="foot"></footer>
+</div>
+<div class="toast" id="toast">링크를 복사했어요</div>
+
+<script>
+/* ===== 데이터: 여기만 고치면 페이지가 갱신됩니다 ===== */
+const META = {
+  searchedOn: "2026년 9월 2일",
+  fx: 8.58, // KRW per JPY (Wise mid-market, 2026-09-02)
+  flights: { arrive: null, depart: null } // 예: "10:35 NGO 도착", "18:20 NGO 출발"
+};
+
+const ITINERARY = [
+  {d:"12/28",w:"월",t:"한국 → 나고야 도착 → 사카에",s:"오아시스21 · 포켓몬센터 나고야(나고야 PARCO 동관 2F, 야바초역 직결) · 저녁·쇼핑",note:"포켓몬센터 10:00–21:00, 연중무휴(연말 시간 변동 가능)",ok:true},
+  {d:"12/29",w:"화",t:"LEGOLAND Japan",s:"아오나미선 킨조후토(金城ふ頭)역 · 거의 하루 종일",note:"2025-26 연말 10:00–18:00 운영 패턴. 2026 캘린더는 공식 사이트에서 재확인",ok:false},
+  {d:"12/30",w:"수",t:"나고야항 수족관 · Sea Train Land",s:"메이코선 나고야코(名古屋港)역 도보 5분 · 겨울 9:30–17:00 · 성인 ¥2,030 / 초등 ¥1,010",note:"수족관은 연말연시 무휴 패턴(2025-26). Sea Train Land는 겨울 단축 운영·휴일 있음 → 확인 필요",ok:false},
+  {d:"12/31",w:"목",t:"체크아웃 → 센트레아 공항 → Flight of Dreams → 귀국",s:"메이테츠 μ-SKY 나고야역 28~37분 · Flight of Dreams 10:00–17:00 무료(연중무휴)",note:"항공편 시간에 따라 짐 보관·출발 시각 조정",ok:true}
+];
+
+const AREAS = [
+  {name:"A. 나고야역 / 메이에키",rec:"추천",cls:"rec",
+   g:[["공항","28~37분 · 0회"],["레고랜드","24분 · 0회"],["수족관","25~31분 · 1회"],["사카에","5분 · 0회"],["포켓몬센터","~12분 · 1회"],["총 환승","1회"]],
+   pros:["μ-SKY(전석 지정, ¥1,430)·아오나미선·히가시야마선 모두 여기서 출발","호텔 선택지 최다, 역 안 식당·백화점·편의점 풍부","일정이 바뀌어도 대부분 직통"],
+   cons:["역이 거대해서 캐리어 끌고 출구 찾기 번거로움(메이테츠↔아오나미 도보 5~8분)","연말 인파"]},
+  {name:"C. 가나야마(金山)",rec:"숨은 대안",cls:"alt",
+   g:[["공항","24~31분 · 0회"],["레고랜드","~35분 · 1회"],["수족관","12분 · 0회"],["사카에","~8분 · 0회"],["포켓몬센터","~6분 · 0회"],["총 환승","1회"]],
+   pros:["μ-SKY 정차, 메이조선·메이코선·JR 집결 → 4곳 직통","역 규모가 작아 아이·캐리어 동선이 짧음","아스나루 가나야마 등 식당·편의점 충분"],
+   cons:["레고랜드는 나고야역 환승(JR 4분 + 아오나미 24분)","호텔 선택지가 적음(사실상 ANA 크라운플라자 1곳)"]},
+  {name:"B. 사카에",rec:"비추천",cls:"",
+   g:[["공항","~40분 · 1회"],["레고랜드","~30분 · 1회"],["수족관","20분 · 0회*"],["사카에","0분"],["포켓몬센터","도보 8분"],["총 환승","2회+"]],
+   pros:["첫날 오아시스21·포켓몬센터·저녁이 도보권","쇼핑·식당 밀도 최고"],
+   cons:["공항·레고랜드 모두 나고야역 경유 → 캐리어 들고 환승","*수족관은 메이조·메이코선 직통 열차 한정"]},
+  {name:"D. 킨조후토(레고랜드 호텔)",rec:"제외",cls:"",
+   g:[["공항","~55분 · 1회"],["레고랜드","도보"],["수족관","~45분 · 2회"],["사카에","~30분 · 1회"],["포켓몬센터","~35분 · 1회"],["총 환승","4회+"]],
+   pros:["레고랜드 당일은 최고(아이들 만족도)","객실 자체가 테마"],
+   cons:["나머지 3일 동선이 전부 나빠짐","1실 정원 성인2+아동2 → 2실 필요, 연말 요금 3박 2실 약 ₩515만(¥60만) 이상(jalan 검색)"]}
+];
+
+/* 가격: 2026-09-02 jalan/라쿠텐 검색, 성인2 기준 객실 요금 × 2실. 초등생 침대공유 무료 정책 적용 시 동일 */
+const HOTELS = [
+ {id:"prince",name:"나고야 프린스 호텔 스카이타워",en:"Nagoya Prince Hotel Sky Tower",ja:"名古屋プリンスホテル スカイタワー",tier:"mid",area:"나고야역 남서(사사시마라이브)",color:"#2A4D7C",
+  station:"아오나미선 사사시마라이브역 직결(도보 2분)",fromNagoya:"나고야역 사쿠라도리 출구 도보 17분 / 아오나미선 1정거장",
+  room:"스카이트윈(커넥트 유스 가능) 32.8㎡ · 120×203cm 침대 2 · 32~36층 · 정원 3명",
+  kid:"공식 페이지에 아동 규정 명시 없음 → 예약 전화 시 초등생 침대공유 무료 여부 확인",
+  conn:"yes",connTxt:"커넥팅룸 객실 있음 (공식 상품)",connNote:"‘스카이트윈(コネクトユース可)’ 2실을 객실 내 문으로 연결. 단, 커넥팅 예약은 전화 접수(052-565-1110)만 가능 — 온라인 예약은 확약 아님",
+  breakfast:"조식 별도(플랜에 따라 포함). 요금 확인 필요",
+  cio:"체크인 15:00 / 체크아웃 12:00",luggage:"확인 필요(대형 호텔, 통상 가능)",
+  conv:"글로벌 게이트 단지 내 편의점·식당 있음",food:"글로벌 게이트 레스토랑가, 나고야역까지 도보 17분",
+  price:{total:280056,label:"¥280,056",note:"스카이트윈 식사 없음 ¥140,028/실 × 2실 (세금 포함, jalan)",tax:"세금 포함"},
+  links:{official:"https://www.princehotels.co.jp/nagoya/",book:"https://www.jalan.net/yad329551/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=2&adultNum=2&distCd=01&yadNo=329551&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=Nagoya+Prince+Hotel+Sky+Tower&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=Nagoya+Prince+Hotel+Sky+Tower"},
+  t:{lego:[22,0,"아오나미선 직통"],sakae:[25,1,"아오나미선→나고야→히가시야마선"],poke:[30,1,"…→사카에 도보 8분 또는 메이조선 야바초"],aqua:[40,1,"아오나미선→나고야→JR→가나야마→메이코선 (실질 2회)"],air:[45,1,"아오나미선 1정거장→나고야→μ-SKY (또는 도보 17분)"]},
+  sc:{loc:22,room:19,conn:15,price:9,st:8,cond:5,near:4},
+  pros:["공식 커넥팅룸 + 32.8㎡ 고층 객실 — 두 가족이 실질적으로 ‘한 집’처럼","레고랜드 직통 22분(전 후보 중 최단)","프리미엄 3곳보다 ₩40만~120만 저렴"],
+  cons:["공항·수족관 갈 땐 환승 1회 또는 나고야역까지 도보 17분(캐리어)","커넥팅 확약은 전화 예약 필수","사사시마 주변 밤 먹거리는 나고야역보다 적음"],
+  src:[["객실·커넥팅(공식)","https://www.princehotels.co.jp/nagoya/room/skytwincn.html"],["접근(공식)","https://www.princehotels.co.jp/nagoya/access/"],["가격(jalan 2026-09-02)","https://www.jalan.net/yad329551/plan/"]]},
+
+ {id:"anacp",name:"ANA 크라운플라자 그랜드코트 나고야",en:"ANA Crowne Plaza Grand Court Nagoya",ja:"ANAクラウンプラザホテルグランコート名古屋",tier:"mid",area:"가나야마(金山)",color:"#0E6F8E",
+  station:"JR·메이테츠·지하철 가나야마역 남쪽 출구 바로 앞",fromNagoya:"JR 4분 / 메이테츠 5분 (1정거장)",
+  room:"디럭스트윈 37㎡ · 120×203cm 침대 2 · 정원 3명 (스탠다드트윈 34㎡는 정원 2명) · 패밀리쿼드 42㎡ 4명",
+  kid:"0~12세 침대공유 무료(야후트래블 게재 정책) · 공식 FAQ: 침대공유 시 숙박료 없음, 베드가드 무료",
+  conn:"request",connTxt:"인접 객실 요청 가능 / 보장 안 됨",connNote:"공식 FAQ: 4명 이상은 ‘인접한 2실’ 또는 패밀리쿼드 등으로 안내, 예약 시 요청. 커넥팅(내부 문) 상품은 확인되지 않음",
+  breakfast:"조식 별도(ADVANCE SAVER 플랜은 조식 포함). 요금 확인 필요",
+  cio:"체크인 15:00 / 체크아웃 12:00",luggage:"체크인 전·체크아웃 후 1F 벨데스크 보관 가능(공식 FAQ)",
+  conv:"역 직결 상업시설, 편의점 도보권",food:"아스나루 가나야마·역 주변 식당 다수",
+  price:{total:null,range:[183960,231960],label:"약 ¥18.4만~23.2만",note:"라쿠텐트래블 디럭스트윈(조식 포함, 30일 전 예약) 1인 1박 ¥15,330~19,330 세금 포함 표시 범위 × 2인 × 3박 × 2실. 날짜별 확정가 아님",tax:"세금 포함(표시 범위)",needCheck:true},
+  links:{official:"https://www.anacrowneplaza-nagoya.jp/",book:"https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1659?f_hizuke=20261228&f_hak=3&f_otona_su=2&f_heya_su=2",booking:"https://www.booking.com/searchresults.html?ss=ANA+Crowne+Plaza+Grand+Court+Nagoya&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=ANA+Crowne+Plaza+Hotel+Grand+Court+Nagoya"},
+  t:{lego:[35,1,"JR→나고야→아오나미선"],sakae:[8,0,"메이조선 4정거장"],poke:[6,0,"메이조선 야바초 3정거장"],aqua:[12,0,"메이코선 직통"],air:[24,0,"μ-SKY 직통(급행 31분 ¥910)"]},
+  sc:{loc:26,room:17,conn:8,price:11,st:10,cond:4,near:4},
+  pros:["공항·수족관·사카에·포켓몬센터 4곳 환승 0회 — 일정이 바뀌어도 안전한 허브","역 바로 앞 + 37㎡ 디럭스트윈, 0~12세 침대공유 무료","중간 예산(₩160만~200만)에서 가장 넓은 방"],
+  cons:["커넥팅룸 상품 없음(인접 객실 요청만)","레고랜드는 나고야역 환승","연말 확정 요금 미확인 → 실시간 확인 필요"],
+  src:[["객실(공식)","https://www.anacrowneplaza-nagoya.jp/pages/stay_standard_floor_twin"],["FAQ 인접객실·짐보관(공식)","https://www.anacrowneplaza-nagoya.jp/pages/faq"],["아동 정책·역 접근","https://travel.yahoo.co.jp/00000191/"],["가격 범위(라쿠텐)","https://hotel.travel.rakuten.co.jp/hotelinfo/plan/1659"]]},
+
+ {id:"ibis",name:"이비스 스타일즈 나고야",en:"ibis Styles Nagoya",ja:"イビススタイルズ名古屋",tier:"value",area:"나고야역 동측(메이에키 4초메)",color:"#1E8A5A",
+  station:"나고야역 도보 약 6~8분",fromNagoya:"도보 6~8분(약 500m)",
+  room:"스탠다드트윈 20㎡ × 2실 연결(총 약 40㎡) · 싱글 침대 2 · 실당 최대 3명",
+  kid:"11세 이하 성인 1인당 1명 침대공유 무료(jalan 게재 정책) · 커넥팅 플랜은 12세 이하 침대공유 아동 조식 무료",
+  conn:"yes",connTxt:"커넥팅룸 객실 있음 (공식 상품)",connNote:"‘コネクティングルーム(스탠다드트윈×2 연결)’ 플랜이 jalan·라쿠텐에 상시 판매. 2실 세트로만 예약 가능",
+  breakfast:"커넥팅 플랜은 조식 뷔페 포함(7:00–10:00), 12세 이하 침대공유 아동 무료",
+  cio:"체크인 14:00 / 체크아웃 11:00",luggage:"확인 필요",
+  conv:"메이에키 4초메 편의점 다수",food:"나고야역 지하상가·미들랜드 스퀘어 도보권",
+  price:{total:207240,label:"¥207,240",alt:"트윈×2 식사 없음 ¥145,800",note:"커넥팅룸(트윈×2)+조식 성인 4명 3박 세트 요금 (jalan). 조식 없는 트윈 2실은 ¥145,800",tax:"세금 포함"},
+  links:{official:"https://all.accor.com/hotel/B4F6/index.ja.shtml",book:"https://www.jalan.net/yad372572/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=1&adultNum=4&distCd=01&yadNo=372572&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=ibis+Styles+Nagoya&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=ibis+Styles+Nagoya"},
+  t:{lego:[32,0,"도보 8분 + 아오나미선 24분"],sakae:[13,0,"도보 8분 + 히가시야마선 5분"],poke:[20,1,"…→사카에→메이조선/도보"],aqua:[35,1,"도보 + JR→가나야마→메이코선"],air:[40,0,"도보 8분 + μ-SKY"]},
+  sc:{loc:27,room:11,conn:15,price:15,st:6,cond:3,near:4},
+  pros:["공식 커넥팅룸을 조식 포함 약 ₩178만에 — 두 가족 커넥팅 중 가장 저렴","아이 조식 무료, 나고야역 도보권이라 동선은 나고야역과 동일","연말 요금이 비교적 안정적"],
+  cons:["실당 20㎡로 좁음(2+1 취침은 가능하나 캐리어 펼치기 빠듯)","역까지 도보 6~8분 × 매일","호텔 등급·후기 수가 적음(jalan 4.0/16건)"],
+  src:[["커넥팅 플랜(라쿠텐)","https://hotel.travel.rakuten.co.jp/PLAN/181187/4973558"],["객실·접근(Accor 공식)","https://all.accor.com/hotel/B4F6/index.en.shtml"],["아동 정책·평점(jalan)","https://www.jalan.net/yad372572/"]]},
+
+ {id:"marriott",name:"나고야 메리어트 아소시아 호텔",en:"Nagoya Marriott Associa Hotel",ja:"名古屋マリオットアソシアホテル",tier:"prem",area:"나고야역 직결(JR 센트럴타워즈)",color:"#7A2E2E",
+  station:"JR 나고야역 바로 위(직결)",fromNagoya:"0분",
+  room:"디럭스트윈 38㎡ 정원 3명(커넥팅 대상, 21~29층) · 스탠다드트윈 35㎡ 정원 2명 · 패밀리 54㎡",
+  kid:"초등학생까지 성인 1인당 1명 침대공유 무료(공식 FAQ). 조식 성인 ¥4,800 / 초등 ¥3,000",
+  conn:"yes",connTxt:"커넥팅룸 객실 있음 (공식, 수량 한정)",connNote:"공식 FAQ: 21~29층 디럭스트윈 일부에 객실 간 내부 문. 수량이 적어 사전 예약 권장 — 예약 시 커넥팅 지정 요청 필요",
+  breakfast:"별도 ¥4,800(성인)/¥3,000(초등) 또는 조식 포함 플랜",
+  cio:"체크인 15:00 / 체크아웃 12:00",luggage:"체크아웃 후 2F·15F 벨캡틴 데스크 보관(공식 FAQ)",
+  conv:"역 구내 편의점·다카시마야 백화점 직결",food:"JR 센트럴타워즈·게이트타워 레스토랑가 직결",
+  price:{total:363000,label:"¥363,000",alt:"스탠다드트윈(조식 포함) ¥339,000",note:"디럭스트윈 조식 포함 ¥181,500/실 × 2실 (세금 포함, jalan). 커넥팅은 디럭스트윈만 대상",tax:"세금 포함"},
+  links:{official:"https://www.associa.com/nma/",book:"https://www.jalan.net/yad386535/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=2&adultNum=2&distCd=01&yadNo=386535&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=Nagoya+Marriott+Associa+Hotel&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=Nagoya+Marriott+Associa+Hotel"},
+  t:{lego:[24,0,"아오나미선 직통"],sakae:[5,0,"히가시야마선"],poke:[12,1,"히가시야마선→사카에→메이조선 야바초"],aqua:[25,1,"JR→가나야마→메이코선"],air:[28,0,"μ-SKY 직통 ¥1,430"]},
+  sc:{loc:29,room:18,conn:13,price:4,st:10,cond:5,near:5},
+  pros:["역 위 호텔 + 커넥팅 디럭스트윈 38㎡ — 동선·객실·커넥팅 3박자","초등생 침대공유 무료, 짐 보관·백화점·식당 모두 건물 안","종합 점수 1위"],
+  cons:["2실·3박 약 ₩311만(¥36.3만) — 후보 중 두 번째로 비쌈","커넥팅 수량 한정, 조식 별도면 4인 ¥15,600/일"],
+  src:[["FAQ 커넥팅·아동·짐보관(공식)","https://www.associa.com/nma/faq/"],["객실(공식)","https://www.associa.com/nma/stay/guestroom/"],["가격(jalan 2026-09-02)","https://www.jalan.net/yad386535/plan/"]]},
+
+ {id:"gate",name:"나고야 JR 게이트타워 호텔",en:"Nagoya JR Gate Tower Hotel",ja:"名古屋JRゲートタワーホテル",tier:"prem",area:"나고야역 직결(JR 게이트타워)",color:"#3B4A6B",
+  station:"JR 나고야역 직결",fromNagoya:"0분",
+  room:"슈페리어트윈 28㎡ · 18~24층 · 디럭스코너트윈 37㎡",
+  kid:"초등학생(12세 이하) 침대 1대당 1명 침대공유 무료(공식 FAQ)",
+  conn:"request",connTxt:"인접 객실 요청 가능 / 보장 안 됨",connNote:"공식 FAQ: “コネクティングルームはございません” — 객실 타입에 따라 옆방 배정은 가능",
+  breakfast:"별도. 요금 확인 필요",
+  cio:"체크인 15:00 / 체크아웃 11:00",luggage:"당일에 한해 15F 프런트 보관(공식 FAQ)",
+  conv:"게이트타워·역 구내 편의점",food:"게이트타워 12~13F 레스토랑가, 다카시마야 직결",
+  price:{total:326440,label:"¥326,440",note:"슈페리어트윈 식사 없음 ¥163,220/실 × 2실 (세금 포함, jalan)",tax:"세금 포함"},
+  links:{official:"https://www.associa.com/ngh/",book:"https://www.jalan.net/yad386900/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=2&adultNum=2&distCd=01&yadNo=386900&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=Nagoya+JR+Gate+Tower+Hotel&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=Nagoya+JR+Gate+Tower+Hotel"},
+  t:{lego:[24,0,"아오나미선 직통"],sakae:[5,0,"히가시야마선"],poke:[12,1,"히가시야마선→사카에→메이조선 야바초"],aqua:[25,1,"JR→가나야마→메이코선"],air:[28,0,"μ-SKY 직통 ¥1,430"]},
+  sc:{loc:29,room:15,conn:7,price:6,st:10,cond:5,near:5},
+  pros:["역 직결 최상급 동선, 후기 평판 안정적","초등생 침대공유 무료"],
+  cons:["커넥팅룸 없음(옆방 요청만)","28㎡ 트윈에 약 ₩280만(¥32.6만) — 메리어트 대비 가성비 낮음"],
+  src:[["FAQ 커넥팅·아동·짐보관(공식)","https://www.associa.com/ngh/faq/"],["객실(공식)","https://www.associa.com/ngh/stay/"],["가격(jalan 2026-09-02)","https://www.jalan.net/yad386900/plan/"]]},
+
+ {id:"hilton",name:"힐튼 나고야",en:"Hilton Nagoya",ja:"ヒルトン名古屋",tier:"prem",area:"후시미(伏見)",color:"#8C6A1F",
+  station:"히가시야마선·쓰루마이선 후시미역 도보 3분",fromNagoya:"히가시야마선 1정거장 + 도보 3분 (약 8분)",
+  room:"디럭스/이그제큐티브 30㎡ · 135×200cm 침대 2 · 실당 최대 4명 (커넥팅 시 최대 8명)",
+  kid:"12세 이하 성인 1인당 1명 침대공유 무료(공식 커넥팅 페이지)",
+  conn:"yes",connTxt:"커넥팅룸 객실 있음 (공식 상품)",connNote:"공식 사이트에 ‘コネクティングルーム’ 전용 페이지·예약 플랜 존재. 디럭스·이그제큐티브·프리미엄 이그제큐티브 2실 연결",
+  breakfast:"별도. 요금 확인 필요",
+  cio:"체크인 15:00 / 체크아웃 12:00",luggage:"확인 필요(대형 호텔, 통상 가능)",
+  conv:"후시미 오피스가 편의점 다수",food:"후시미·사카에 사이, 도보 10분이면 사카에",
+  price:{total:416760,label:"¥416,760",note:"디럭스룸 식사 없음 ¥208,380/실 × 2실 (세금 포함, jalan). 커넥팅 지정 플랜은 공식 사이트에서 별도 확인",tax:"세금 포함"},
+  links:{official:"https://nagoya.hiltonjapan.co.jp/rooms/connecting",book:"https://www.jalan.net/yad337680/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=2&adultNum=2&distCd=01&yadNo=337680&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=Hilton+Nagoya&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=Hilton+Nagoya"},
+  t:{lego:[35,1,"히가시야마선→나고야→아오나미선"],sakae:[2,0,"히가시야마선 1정거장 / 도보 10분"],poke:[10,1,"사카에 경유 도보 or 메이조선"],aqua:[25,1,"히가시야마선→사카에→메이조·메이코선"],air:[40,1,"히가시야마선→나고야→μ-SKY"]},
+  sc:{loc:25,room:17,conn:15,price:2,st:8,cond:5,near:4},
+  pros:["커넥팅 시스템이 가장 잘 정비된 호텔(전용 페이지·플랜)","첫날 사카에 일정에 최적, 아이 프로그램 있음"],
+  cons:["2실·3박 약 ₩358만(¥41.7만) — 최고가","공항·레고랜드 모두 나고야역 환승"],
+  src:[["커넥팅룸(공식)","https://nagoya.hiltonjapan.co.jp/rooms/connecting"],["가격(jalan 2026-09-02)","https://www.jalan.net/yad337680/plan/"]]},
+
+ {id:"sotetsu",name:"소테츠 프레사 인 나고야역 사쿠라도리구치",en:"Sotetsu Fresa Inn Nagoya-Eki Sakuradoriguchi",ja:"相鉄フレッサイン 名古屋駅桜通口",tier:"value",area:"나고야역 동측",color:"#5B6B7F",
+  station:"나고야역 사쿠라도리 출구 도보 약 4분",fromNagoya:"도보 4분",
+  room:"트윈(110cm 침대 2) · 면적 확인 필요(비즈니스호텔 규모, 2+1 취침은 빠듯)",
+  kid:"침대공유 규정 확인 필요",
+  conn:"request",connTxt:"커넥트룸 플랜 있음 (수량 한정, 요금 미확인)",connNote:"jalan 공지 ‘室数限定 コネクトルーム’ 플랜(2실 연결, 최대 4명) 존재. 연말 판매 여부·요금은 확인 필요",
+  breakfast:"플랜에 따라 포함",
+  cio:"체크인 15:00 / 체크아웃 11:00",luggage:"확인 필요",
+  conv:"도보 1~2분 편의점",food:"나고야역 지하상가 도보권",
+  price:{total:59340,label:"¥59,340",note:"트윈 식사 없음 ¥29,670/실 × 2실 (세금 포함, jalan). 커넥트룸 플랜 요금 미확인 — 연말 요금 인상 가능성 재확인 권장",tax:"세금 포함",needCheck:true},
+  links:{official:"https://sotetsu-hotels.com/fresa-inn/nagoya-sakuradoriguchi/",book:"https://www.jalan.net/yad347300/plan/?stayYear=2026&stayMonth=12&stayDay=28&stayCount=3&roomCount=2&adultNum=2&distCd=01&yadNo=347300&dateUndecided=0",booking:"https://www.booking.com/searchresults.html?ss=Sotetsu+Fresa+Inn+Nagoya-Eki+Sakuradoriguchi&checkin=2026-12-28&checkout=2026-12-31&group_adults=4&group_children=2&age=7&age=7&no_rooms=2",maps:"https://www.google.com/maps/search/?api=1&query=Sotetsu+Fresa+Inn+Nagoya+Eki+Sakuradoriguchi"},
+  t:{lego:[28,0,"도보 4분 + 아오나미선"],sakae:[9,0,"도보 4분 + 히가시야마선"],poke:[16,1,"…→사카에→메이조선/도보"],aqua:[30,1,"도보 + JR→가나야마→메이코선"],air:[35,0,"도보 4분 + μ-SKY"]},
+  sc:{loc:27,room:9,conn:11,price:15,st:8,cond:3,near:4},
+  pros:["압도적 가격(2실·3박 약 ₩51만, ¥5.9만)","역 도보 4분, 커넥트룸 플랜 존재"],
+  cons:["객실이 작아 아이와 셋이 자기엔 답답할 수 있음","커넥트룸 요금·연말 판매 미확인, 아동 규정 미확인"],
+  src:[["커넥트룸 공지(jalan)","https://www.jalan.net/yad347300/topics/entry0006127433.html"],["가격(jalan 2026-09-02)","https://www.jalan.net/yad347300/plan/"]]}
+];
+
+const DROPPED = "1차 조사 후 제외: 미쓰이가든 나고야 프리미어(트윈 정원 2명·커넥팅 없음), 다이와로이넷 타이코도리구치(디럭스트윈 ¥79,100/실·커넥팅 없음), 나고야 도큐 호텔(사카에·연말 확정가 미확인), 나고야 칸코 호텔(커넥팅 없음), 레고랜드 재팬 호텔(2실 ₩515만+·다른 3일 동선 불리).";
+
+const PICKS = [
+ {id:"prince",lbl:"🥇 BEST PICK",why:"<b>공식 커넥팅룸 + 레고랜드 직통 + 중간 예산</b>. 두 가족의 1순위(커넥팅)를 확보하면서 ₩260만을 넘기지 않는 유일한 선택. 공항·수족관은 환승 1회지만 택시 한 번이면 해결."},
+ {id:"anacp",lbl:"🥈 SECOND PICK",why:"<b>일정이 바뀌어도 가장 안전한 허브</b>. 공항·수족관·사카에·포켓몬센터 전부 직통, 역 바로 앞 37㎡. 커넥팅은 없지만 ‘옆방 요청’으로 충분하다면 프린스보다 ₩40만~80만 아낄 수 있어요."},
+ {id:"ibis",lbl:"💰 BEST VALUE",why:"<b>커넥팅룸을 조식 포함 약 ₩178만에</b>. 방은 20㎡로 좁지만 문으로 연결된 2실 + 아이 조식 무료. 나고야역 도보 6~8분이라 동선은 나고야역 호텔과 같아요."}
+];
+const BADGES = {
+  "🚪 BEST CONNECTING ROOM":"prince",
+  "🏨 PREMIUM PICK":"marriott"
+};
+
+const FINAL = [
+ {m:"🥇",id:"prince",t:"1순위 — 나고야 프린스 호텔 스카이타워 (커넥팅 스카이트윈)",p:"커넥팅 확약 + 32.8㎡ + 레고랜드 직통. 전화 예약으로 커넥팅 확정 가능한지 먼저 확인.",cond:"메리어트 커넥팅 디럭스트윈과의 차이가 <b>3박 총 ₩40만 이내</b>로 좁혀지면(프로모션 등) 메리어트로 갈아타는 게 합리적. 지금 기준 차이는 약 ₩71만(¥8.3만)."},
+ {m:"🥈",id:"anacp",t:"2순위 — ANA 크라운플라자 그랜드코트 나고야 (가나야마)",p:"커넥팅을 포기할 수 있다면 이게 정답. 실시간 요금이 ₩170만 안팎이면 프린스보다 ₩70만 저렴하고 동선은 더 좋음.",cond:"프린스 커넥팅이 전화로 확약되지 않을 때의 <b>플랜 B</b>. 예약 시 ‘같은 층 인접 객실’ 요청 필수."},
+ {m:"🥉",id:"ibis",t:"3순위 — 이비스 스타일즈 나고야 (커넥팅 + 조식)",p:"예산이 최우선이면 여기. 커넥팅·조식 포함 약 ₩178만.",cond:"단, 방이 20㎡라 짐이 많다면 소테츠 프레사 인 트윈 2실(약 ₩51만)에 옆방 요청하는 것도 검토."}
+];
+
+/* ===== 렌더 ===== */
+const W = {loc:30,room:20,conn:15,price:15,st:10,cond:5,near:5};
+const WN = {loc:"입지/동선",room:"객실·가족편의",conn:"커넥팅/인접",price:"가격",st:"역 접근성",cond:"컨디션/후기",near:"식당·편의"};
+const total = h => Object.values(h.sc).reduce((a,b)=>a+b,0);
+const krw = y => "₩"+Math.round(y*META.fx/10000).toLocaleString("ko-KR")+"만";
+const krwFull = y => "₩"+(Math.round(y*META.fx/1000)*1000).toLocaleString("ko-KR");
+const yen = y => "¥"+y.toLocaleString();
+const tierName = {value:"가성비",mid:"중간",prem:"프리미엄"};
+const tierCls = {value:"c-ok",mid:"c-info",prem:"c-warn"};
+const connCls = {yes:"c-ok",request:"c-warn",check:"c-no"};
+const byId = id => HOTELS.find(h=>h.id===id);
+const priceStr = h => h.price.total ? krw(h.price.total) : (h.price.range ? "약 "+krw(h.price.range[0])+"~"+krw(h.price.range[1]) : "확인 필요");
+const yenStr = h => h.price.label;
+const priceKrw = h => yenStr(h);
+const perFam = h => h.price.total ? "가족당 약 "+krwFull(h.price.total/2) : (h.price.range? "가족당 약 "+krw(h.price.range[0]/2)+"~"+krw(h.price.range[1]/2):"");
+const roomSize = h => (h.room.match(/(\d+(?:\.\d+)?)㎡/)||[,"?"])[1];
+const walk = h => (h.station.match(/도보\s*(약\s*)?(\d+(?:~\d+)?)분/)||[])[2] ? (h.station.match(/도보\s*(약\s*)?(\d+(?:~\d+)?)분/)[2]+"분") : "직결";
+
+/* flight notice */
+(()=>{const f=META.flights;const el=document.getElementById("flightNotice");
+ if(!f.arrive&&!f.depart){el.innerHTML="✈️ <b>항공편 시간 입력 전</b> — 도착/출발 시각이 정해지면 첫날 사카에 일정과 마지막 날 짐 보관·공항 이동 판단이 달라질 수 있어요. (데이터의 <code>META.flights</code>에 입력)";}
+ else el.innerHTML=`✈️ 도착 ${f.arrive||"미정"} · 출발 ${f.depart||"미정"}`;})();
+
+/* timeline */
+document.getElementById("timeline").innerHTML = ITINERARY.map(d=>`
+ <div class="day"><div class="d">${d.d}<small>${d.w} · DAY ${ITINERARY.indexOf(d)+1}</small></div>
+ <div><div class="t">${d.t}</div><div class="s">${d.s}</div><div class="w ${d.ok?'ok':''}">${d.ok?'✓':'⚠'} ${d.note}</div></div></div>`).join("");
+
+/* areas */
+document.getElementById("areas").innerHTML = AREAS.map(a=>`
+ <div class="area ${a.cls}"><span class="tag ${a.cls==='alt'?'alt':''}" ${a.cls===''?'style="background:var(--surface2);color:var(--ink3)"':''}>${a.rec}</span>
+ <h3>${a.name}</h3>
+ <div class="grid">${a.g.map(([k,v])=>`<div><span>${k}</span><b>${v}</b></div>`).join("")}</div>
+ <ul>${a.pros.map(p=>`<li>👍 ${p}</li>`).join("")}${a.cons.map(p=>`<li>👎 ${p}</li>`).join("")}</ul></div>`).join("");
+
+/* picks */
+document.getElementById("picks").innerHTML = PICKS.map(p=>{const h=byId(p.id);const extra=Object.entries(BADGES).filter(([,id])=>id===h.id).map(([b])=>`<span class="chip c-info">${b}</span>`).join("");
+ return `<article class="pick"><div class="banner" style="background:linear-gradient(160deg,${h.color},${h.color}CC)">
+  <div class="top"><span class="lbl">${p.lbl}</span><div class="sc"><span class="score">${total(h)}</span><small>/ 100</small></div></div>
+  <h3>${h.name}</h3><div class="ja">${h.en} · ${h.ja}</div></div>
+  <div class="body"><div class="kpis">
+   <div class="kpi"><div class="v">${priceStr(h).replace('약 ','')}</div><div class="k">2객실·3박${h.price.needCheck?' ⚠':''}</div></div>
+   <div class="kpi"><div class="v">${roomSize(h)}㎡</div><div class="k">객실 크기</div></div>
+   <div class="kpi"><div class="v">${walk(h)}</div><div class="k">역 도보</div></div>
+   <div class="kpi"><div class="v">${h.conn==='yes'?'있음':'요청'}</div><div class="k">커넥팅</div></div></div>
+  <p class="why">${p.why}</p>
+  <div class="chips"><span class="chip ${tierCls[h.tier]}">${tierName[h.tier]}</span><span class="chip ${connCls[h.conn]}">${h.connTxt}</span>${extra}<span class="chip c-info">${yenStr(h)} · ${perFam(h)}</span></div>
+  </div></article>`}).join("");
+
+/* comparison */
+const sorted=[...HOTELS].sort((a,b)=>total(b)-total(a));
+document.getElementById("cmpCards").innerHTML = sorted.map(h=>`
+ <div class="cmp"><div class="n">${h.name}<small>${h.area} · <span class="chip ${tierCls[h.tier]}" style="padding:1px 7px">${tierName[h.tier]}</span></small></div><div class="sc">${total(h)}<small>종합</small></div>
+ <div class="price"><b>${priceStr(h)}</b> · ${yenStr(h)}${h.price.needCheck?' <span class="chip c-warn">실시간 확인</span>':''}</div>
+ <div class="row"><div><span>객실</span><b>${roomSize(h)}㎡</b></div><div><span>역</span><b>${walk(h)}</b></div><div><span>커넥팅</span><b class="${h.conn==='yes'?'':'muted'}">${h.conn==='yes'?'있음':'요청'}</b></div><div><span>레고/수족관/공항</span><b>${h.t.lego[0]}/${h.t.aqua[0]}/${h.t.air[0]}분</b></div></div></div>`).join("");
+document.getElementById("cmpTable").innerHTML = `<thead><tr><th>호텔</th><th>가격(2실·3박)</th><th>객실</th><th>역</th><th>커넥팅</th><th>레고랜드</th><th>수족관</th><th>공항</th><th>종합</th></tr></thead><tbody>`+
+ sorted.map(h=>`<tr><td><b>${h.name}</b><br><span class="tiny">${h.area} · ${tierName[h.tier]}</span></td><td class="num">${priceStr(h)}${h.price.needCheck?' ⚠':''}<br><span class="tiny">${yenStr(h)}</span></td><td class="num">${roomSize(h)}㎡</td><td>${walk(h)}</td><td><span class="chip ${connCls[h.conn]}">${h.conn==='yes'?'있음':'요청'}</span></td><td class="num">${h.t.lego[0]}분<br><span class="tiny">환승 ${h.t.lego[1]}</span></td><td class="num">${h.t.aqua[0]}분<br><span class="tiny">환승 ${h.t.aqua[1]}</span></td><td class="num">${h.t.air[0]}분<br><span class="tiny">환승 ${h.t.air[1]}</span></td><td class="num" style="font-size:18px">${total(h)}</td></tr>`).join("")+`</tbody>`;
+document.getElementById("dropped").textContent = DROPPED;
+
+/* details */
+const DEST = {lego:["🎢","LEGOLAND"],sakae:["🌃","사카에 / Oasis 21"],poke:["🎮","포켓몬센터(야바초)"],aqua:["🐬","나고야항 수족관"],air:["✈️","센트레아 공항"]};
+document.getElementById("hotels").innerHTML = sorted.map(h=>`
+ <details class="h" id="h-${h.id}"><summary><div class="mono" style="background:${h.color}">${h.en[0]}</div><div class="t">${h.name}<small>${h.en} · ${h.area}</small></div><div class="sc">${total(h)}</div></summary>
+ <div class="hb">
+  <div class="links"><a class="btn" href="${h.links.official}" target="_blank" rel="noopener">🏨 공식 홈페이지</a><a class="btn" href="${h.links.book}" target="_blank" rel="noopener">🗓 예약 확인 (jalan/라쿠텐)</a><a class="btn" href="${h.links.booking}" target="_blank" rel="noopener">🌐 Booking.com</a><a class="btn" href="${h.links.maps}" target="_blank" rel="noopener">📍 Google Maps</a></div>
+  <div class="pricebox"><div class="big">${priceStr(h)} <span style="font-size:13px;font-weight:600;color:var(--ink2)">/ 2객실 · 3박</span></div>
+   <div class="sub">→ ${perFam(h)} · 엔화 ${yenStr(h)} (100엔 = ₩${Math.round(META.fx*100)})${h.price.alt?` · 대안: ${h.price.alt}`:""}</div>
+   <div class="sub">${h.price.note}${h.price.needCheck?' <span class="chip c-warn">실시간 가격 확인 필요</span>':''}</div></div>
+  <div><h4>객실 · 아이 투숙</h4><dl class="kv"><dt>객실</dt><dd>${h.room}</dd><dt>7세 아동</dt><dd>${h.kid}</dd><dt>조식</dt><dd>${h.breakfast}</dd><dt>체크인/아웃</dt><dd>${h.cio}</dd><dt>짐 보관</dt><dd>${h.luggage}</dd></dl></div>
+  <div><h4>커넥팅룸</h4><span class="chip ${connCls[h.conn]}" style="font-size:12px">${h.connTxt}</span><p style="margin:8px 0 0;font-size:13px;color:var(--ink2)">${h.connNote}</p></div>
+  <div><h4>위치 · 교통</h4><dl class="kv"><dt>가까운 역</dt><dd>${h.station}</dd><dt>나고야역에서</dt><dd>${h.fromNagoya}</dd><dt>편의점</dt><dd>${h.conv}</dd><dt>식당</dt><dd>${h.food}</dd></dl>
+   <div class="route" style="margin-top:8px">${Object.entries(h.t).map(([k,[m,x,r]])=>`<div><span>${DEST[k][0]}</span><span><b style="color:var(--ink)">${DEST[k][1]}</b> · ${r}</span><b>${m}분 · 환승 ${x}</b></div>`).join("")}</div></div>
+  <div><h4>점수 근거 (${total(h)}/100)</h4><div class="scorebar">${Object.keys(W).map(k=>`<div><span style="text-align:left;font-family:inherit;font-weight:500;color:var(--ink2)">${WN[k]} (${W[k]})</span><i><b style="width:${h.sc[k]/W[k]*100}%"></b></i><span>${h.sc[k]}</span></div>`).join("")}</div></div>
+  <div class="pc"><div class="pro"><h4 style="color:var(--ok)">장점</h4><ul>${h.pros.map(p=>`<li>${p}</li>`).join("")}</ul></div><div class="con"><h4 style="color:var(--no)">단점</h4><ul>${h.cons.map(p=>`<li>${p}</li>`).join("")}</ul></div></div>
+  <div class="src">정보 확인 출처: ${h.src.map(([n,u])=>`<a href="${u}" target="_blank" rel="noopener">${n}</a>`).join(" · ")}<br>숙박요금은 ${META.searchedOn} 검색 기준(성인 2명 객실 요금 × 2실)이며 변동될 수 있습니다. 사진은 Google Maps·공식 홈페이지 링크에서 확인하세요.</div>
+ </div></details>`).join("");
+
+/* matrix */
+(()=>{const keys=["lego","aqua","sakae","poke","air"];const best={};keys.forEach(k=>best[k]=Math.min(...HOTELS.map(h=>h.t[k][0])));
+ document.getElementById("matrix").innerHTML=`<thead><tr><th>호텔</th>${keys.map(k=>`<th>${DEST[k][0]}<br>${DEST[k][1].split(" ")[0].split("(")[0]}</th>`).join("")}</tr></thead><tbody>`+
+ sorted.map(h=>`<tr><td><b>${h.name}</b></td>${keys.map(k=>`<td class="${h.t[k][0]===best[k]?'best':''}"><span class="m">${h.t[k][0]}</span><span class="x">분 · 환승 ${h.t[k][1]}</span></td>`).join("")}</tr>`).join("")+`</tbody>`;})();
+
+/* final */
+document.getElementById("final").innerHTML = FINAL.map(f=>{const h=byId(f.id);return `<div class="rank"><div class="medal">${f.m}</div><div><h3>${f.t}</h3><p>${f.p} · <b class="num">${priceStr(h)}</b> (${yenStr(h)})</p><div class="cond">${f.cond}</div></div></div>`}).join("");
+
+/* footer */
+document.getElementById("foot").innerHTML = `숙박요금은 ${META.searchedOn} jalan.net / 라쿠텐트래블 검색 기준이며 변동될 수 있습니다. 환율 100엔 = ₩${Math.round(META.fx*100)} (Wise 매매기준율, ${META.searchedOn}) — 원화 금액은 이 환율로 환산한 추정치. 이동시간은 駅探(ekitan)·공식 교통 안내 기준 대략치로, 도보·대기 시간에 따라 달라질 수 있어요. 커넥팅룸 표기는 공식 홈페이지·예약 사이트에 실제 상품이 있는 경우만 ‘있음’으로 표시했고, 요청만 가능한 경우는 ‘요청’으로 구분했습니다.<br>교통 출처: <a href="https://ekitan.com/transit/fare/sf-4455/st-9447">아오나미선 요금·시간</a> · <a href="https://ekitan.com/transit/express/section/exm-112898/exs-112898007/sf-4267/st-9459">μ-SKY 요금·시간</a> · <a href="https://ekitan.com/transit/route/sf-4455/st-4458">나고야→나고야코</a> · <a href="https://ekitan.com/transit/route/sf-4174/st-4458">사카에→나고야코</a> · <a href="https://ekitan.com/transit/fare/sf-4004/st-9459">가나야마→공항</a> · <a href="https://nagoyaaqua.jp/fee/">수족관 요금</a> · <a href="https://aichinow.pref.aichi.jp/spots/detail/2446/">Flight of Dreams</a> · <a href="https://www.poke-memo.com/nagoya-pokemon-center/">포켓몬센터 위치</a>`;
+
+/* share */
+const toast=m=>{const t=document.getElementById("toast");t.textContent=m;t.classList.add("show");setTimeout(()=>t.classList.remove("show"),1800)};
+const copy=async()=>{try{await navigator.clipboard.writeText(location.href);toast("링크를 복사했어요")}catch(e){prompt("링크를 복사하세요",location.href)}};
+const share=async()=>{const d={title:"나고야 가족여행 숙소 고르기 🇯🇵",text:"2026.12.28–31 · 두 가족의 숙소 후보를 비교해봤어요",url:location.href};
+ if(navigator.share){try{await navigator.share(d)}catch(e){}}else{copy();toast("링크를 복사했어요 — 카카오톡에 붙여넣기")}};
+document.getElementById("btnShare").onclick=share;document.getElementById("btnCopy").onclick=copy;
+document.querySelectorAll("[data-share]").forEach(b=>b.onclick=share);document.querySelectorAll("[data-copy]").forEach(b=>b.onclick=copy);
+</script>
+
+</body></html>
